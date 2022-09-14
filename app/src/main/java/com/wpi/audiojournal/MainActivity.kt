@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            MainApp()
         }
     }
 }
@@ -33,11 +33,6 @@ private fun MainApp() {
         MenuItem("Program Schedule"),
         MenuItem("Help")
     ))
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true, widthDp = 320)

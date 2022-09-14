@@ -17,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.wpi.audiojournal.ui.theme.RoundButton
 
 @Composable
 fun HomeScreen(menuItems: List<MenuItem>) {
@@ -65,13 +64,3 @@ fun HomeScreen(menuItems: List<MenuItem>) {
         }
     }
 }
-
-//This is for the palette changer
-@Composable
-fun ScreenPalette() {
-
-    Button(onClick = { /*TODO*/ }) {
-        //Icon(painter = Painter., contentDescription = "Color Palette Button")
-    }
-}
-
