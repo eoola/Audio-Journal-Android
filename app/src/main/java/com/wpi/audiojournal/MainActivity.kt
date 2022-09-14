@@ -16,28 +16,38 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AudioJournalTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            MainApp()
         }
     }
 }
 
+data class MenuItem(val title: String)
+
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+private fun MainApp() {
+    HomeScreen(menuItems = listOf(
+        MenuItem("Listen Live"),
+        MenuItem("Archived Programs"),
+        MenuItem("Resume Last Broadcast"),
+        MenuItem("Favorite Programs"),
+        MenuItem("Program Schedule"),
+        MenuItem("Help")
+    ))
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     AudioJournalTheme {
-        Greeting("Android")
+        HomeScreen(
+            menuItems = listOf(
+                MenuItem("Listen Live"),
+                MenuItem("Archived Programs"),
+                MenuItem("Resume Last Broadcast"),
+                MenuItem("Favorite Programs"),
+                MenuItem("Program Schedule"),
+                MenuItem("Help")
+            )
+        )
     }
 }
