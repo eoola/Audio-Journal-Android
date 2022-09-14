@@ -17,18 +17,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            HomeScreen()
-            /*AudioJournalTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }*/
         }
     }
+}
+
+data class MenuItem(val title: String)
+
+@Composable
+private fun MainApp() {
+    HomeScreen(menuItems = listOf(
+        MenuItem("Listen Live"),
+        MenuItem("Archived Programs"),
+        MenuItem("Resume Last Broadcast"),
+        MenuItem("Favorite Programs"),
+        MenuItem("Program Schedule"),
+        MenuItem("Help")
+    ))
 }
 
 @Composable
@@ -36,10 +40,19 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     AudioJournalTheme {
-        Greeting("Android")
+        HomeScreen(
+            menuItems = listOf(
+                MenuItem("Listen Live"),
+                MenuItem("Archived Programs"),
+                MenuItem("Resume Last Broadcast"),
+                MenuItem("Favorite Programs"),
+                MenuItem("Program Schedule"),
+                MenuItem("Help")
+            )
+        )
     }
 }
