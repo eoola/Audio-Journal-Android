@@ -29,7 +29,7 @@ fun SplashScreen(navController: NavController){
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(color = colorResource(R.color.light_blue))){
+        .background(color = colorResource(R.color.blue))){
         Column (verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = 30.sp, fontWeight = FontWeight.Bold)
