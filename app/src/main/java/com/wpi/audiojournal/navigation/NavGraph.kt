@@ -15,7 +15,14 @@ fun SetupNavGraph(navController: NavHostController){
             SplashScreen(navController = navController)
         }
         composable("home"){
-            HomeScreen()
+            HomeScreen(menuItems = listOf(
+                MenuItem("Listen Live"),
+                MenuItem("Archived Programs"),
+                MenuItem("Resume Last Broadcast"),
+                MenuItem("Favorite Programs"),
+                MenuItem("Program Schedule"),
+                MenuItem("Help")
+            ))
         }
     }
 }
