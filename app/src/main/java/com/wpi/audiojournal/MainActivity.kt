@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.wpi.audiojournal.navigation.SetupNavGraph
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
 
 data class MenuItem(val title: String)
