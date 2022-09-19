@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
+import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,6 +27,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             AudioJournalTheme {
                 // A surface container using the 'background' color from the theme
+                /*ProgramCategoriesScreen(menuItems = listOf(
+                    MenuItem("Local Newspaper"),
+                    MenuItem("Retail Circulars and Sales"),
+                    MenuItem("Specialty Program")))*/
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background

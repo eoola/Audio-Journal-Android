@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
+import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.SplashScreen
 
 @Composable
@@ -23,7 +24,13 @@ fun SetupNavGraph(navController: NavHostController){
                 MenuItem("Favorite Programs"),
                 MenuItem("Program Schedule"),
                 MenuItem("Help")
-            ))
+            ), navController=navController)
+        }
+        composable("Archived Programs"){
+            ProgramCategoriesScreen(menuItems = listOf(
+                MenuItem("Local Newspaper"),
+                MenuItem("Retail Circulars and Sales"),
+                MenuItem("Specialty Program")), "Archived Programs", navController=navController)
         }
     }
 }
