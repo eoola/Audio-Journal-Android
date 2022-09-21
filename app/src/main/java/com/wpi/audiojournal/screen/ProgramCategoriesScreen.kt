@@ -33,7 +33,7 @@ fun ProgramCategoriesScreen(menuItems: List<MenuItem>, title: String, navControl
             //.fillMaxSize()
             .size(width = 60.dp, height = 50.dp),
         shape = RoundedCornerShape(30),
-        onClick = { navController.navigate("home") }
+        onClick = { navController.popBackStack() }
     ) {
         Text(
             text = "Back",
