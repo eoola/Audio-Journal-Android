@@ -13,13 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-<<<<<<<< HEAD:app/src/main/java/com/wpi/audiojournal/screen/HomeScreen.kt
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.R
-
-========
 import com.wpi.audiojournal.models.MenuItem
->>>>>>>> 929cb6f (Move HomeScreen file to Screens folder):app/src/main/java/com/wpi/audiojournal/screens/HomeScreen.kt
 
 @Composable
 fun HomeScreen(menuItems: List<MenuItem>) {
