@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.R
+import com.wpi.audiojournal.models.MenuItem
 
 @Composable
 fun GeneralProgramsScreen(menuItems: List<MenuItem>) {

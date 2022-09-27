@@ -71,7 +71,8 @@ fun DefaultPreview() {
                 MenuItem("Favorite Programs"),
                 MenuItem("Program Schedule"),
                 MenuItem("Help")
-            )
+            ),
+            navController = rememberNavController()
         )
     }
 }

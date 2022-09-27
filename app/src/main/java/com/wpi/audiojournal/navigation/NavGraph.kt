@@ -30,7 +30,7 @@ fun SetupNavGraph(navController: NavHostController){
             ProgramCategoriesScreen(menuItems = listOf(
                 MenuItem("Local Newspaper"),
                 MenuItem("Retail Circulars and Sales"),
-                MenuItem("Specialty Program")), "Archived Programs", navController=navController)
+                MenuItem("Specialty Program")), navController=navController)
         }
     }
 }
