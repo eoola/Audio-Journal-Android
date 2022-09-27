@@ -11,15 +11,9 @@ import androidx.navigation.compose.rememberNavController
 import com.wpi.audiojournal.navigation.SetupNavGraph
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.repositories.AudioJournalService
+import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
-data class MenuItem(val title: String)
 
 class MainActivity : ComponentActivity() {
     /*
