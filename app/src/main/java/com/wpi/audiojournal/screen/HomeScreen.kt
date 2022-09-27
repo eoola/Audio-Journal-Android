@@ -13,9 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.R
-
+import com.wpi.audiojournal.models.MenuItem
 
 @Composable
 fun HomeScreen(menuItems: List<MenuItem>) {
