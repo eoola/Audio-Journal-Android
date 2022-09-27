@@ -20,9 +20,19 @@ fun ProgramCategoriesScreen(menuItems: List<MenuItem>, navController: NavControl
     Column() {
         Header(title = "Program Categories", navController = navController)
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            //SEARCH BAR Button
             Button(
-                modifier = Modifier.size(width = 300.dp, height = 40.dp),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 1.dp,
+                        vertical = 10.dp
+                    )
+                    .fillMaxWidth()
+                    .size(width = 300.dp, height = 40.dp),
                 shape = CircleShape,
                 onClick = { /*TODO*/ }
             ) {
@@ -31,7 +41,10 @@ fun ProgramCategoriesScreen(menuItems: List<MenuItem>, navController: NavControl
                     style = MaterialTheme.typography.subtitle2
                 )
             }
+
             LazyColumn(
+                modifier = Modifier.padding(top = 10.dp),
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(items = menuItems) { menuItem ->
@@ -44,7 +57,13 @@ fun ProgramCategoriesScreen(menuItems: List<MenuItem>, navController: NavControl
                             .fillMaxSize()
                             .size(width = 100.dp, height = 80.dp),
                         shape = CircleShape,
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            // if(menuItem.title.equals("Archived Programs")){
+                            //   navController.navigate("Archived Programs")
+                            //}
+                            navController.navigate("moreGeneralCategory/${menuItem.title}")
+
+                        }
                     ) {
                         Text(
                             text = menuItem.title,

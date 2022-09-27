@@ -8,9 +8,11 @@ import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.SplashScreen
+import com.wpi.audiojournal.data.DataStuff
+import com.wpi.audiojournal.screen.*
 
 @Composable
-fun SetupNavGraph(navController: NavHostController){
+fun SetupNavGraph(navController: NavHostController, data: ArchiveDataObjects){
     NavHost(navController = navController, startDestination = "loading"){
 
         composable("loading"){
@@ -31,6 +33,20 @@ fun SetupNavGraph(navController: NavHostController){
                 MenuItem("Local Newspaper"),
                 MenuItem("Retail Circulars and Sales"),
                 MenuItem("Specialty Program")), navController=navController)
+        }
+        composable("moreGeneralCategory/{menuTitle}"){
+                navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
+            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController, title = menuItemTitle.toString())
+        }
+        composable("category/{menuTitle}"){
+           navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
+            GeneralProgramsScreen(
+                menuItems = data.getMenuItems(menuItemTitle.toString(),"general programs"),
+                navController = navController,
+                title = menuItemTitle.toString(),
+                airtime = data.getProgramInformation(menuItemTitle.toString())[0],
+                description = data.getProgramInformation(menuItemTitle.toString())[1]
+            )
         }
     }
 }
