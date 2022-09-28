@@ -4,16 +4,9 @@ sealed class Screens (val route: String){
 
     object homeScreen : Screens("home")
     object loadingScreen: Screens("loading")
+    object programScheduleScreen: Screens("Program Schedule")
+    object dynamicProgramScheduleView: Screens("Schedule")
     object programCategoriesScreen: Screens("Archived Programs")
     object localNewsPaper: Screens("moreGeneralCategory")
     object generalCatScreen: Screens("category")
-
-
-    //object screen: Screens(name)
-
-
-
-
-
-
 }
