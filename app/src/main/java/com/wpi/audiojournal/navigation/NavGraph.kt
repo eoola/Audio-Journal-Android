@@ -3,8 +3,10 @@ package com.wpi.audiojournal.navigation
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
@@ -37,6 +39,24 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
                 ), navController = navController
             )
         }
+
+        composable("Program Schedule"){
+            ProgramSchedule(menuItems = listOf(
+                MenuItem("Sunday"),
+                MenuItem("Monday"),
+                MenuItem("Tuesday"),
+                MenuItem("Wednesday"),
+                MenuItem("Thursday"),
+                MenuItem("Friday"),
+                MenuItem("Saturday")
+            ), navController = navController, title = "Program Schedule")
+        }
+
+        composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
+            DailySchedule(navController = navController, title = it.arguments?.getString("day"))
+            ), navController = navController)
+        }
+
         composable("Archived Programs") {
             var menuItems = items.getMenuItems("Archived Programs")
             ArchiveCategoriesView(menuItems = menuItems, navController = navController)
