@@ -47,13 +47,24 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-//            override fun onFailure(call: Call<CategoriesDTO?>, t: Throwable) {
-//                println("there was an error")
-//            }
-//        })
-//    }
-//     */
     }
+    /*
+    private fun beginFetch() {
+        audioJournalServe.getCategories().enqueue(object : Callback<CategoriesDTO> {
+            override fun onResponse(call: Call<CategoriesDTO>, response: Response<CategoriesDTO>) {
+                val responseBody = response.body()
+                for (key in responseBody?.categories?.keys!!) {
+                    println(key)
+                }
+            }
+
+            override fun onFailure(call: Call<CategoriesDTO?>, t: Throwable) {
+                println("there was an error")
+            }
+        })
+    }
+     */
+}
 
     @Preview(showBackground = true, widthDp = 320)
     @Composable
@@ -71,4 +82,3 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
-}
