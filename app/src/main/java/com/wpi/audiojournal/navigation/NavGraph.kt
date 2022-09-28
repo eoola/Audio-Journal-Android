@@ -56,7 +56,6 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
 
         composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
             DailySchedule(navController = navController, title = it.arguments?.getString("day"))
-            ), navController = navController)
         }
 
         composable("Archived Programs") {
