@@ -15,6 +15,7 @@ import com.wpi.audiojournal.navigation.Screens
 import com.wpi.audiojournal.navigation.SetupNavGraph
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.GeneralCategoryScreen
@@ -39,12 +40,35 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     val getData = DataStuff()
-                    val data= getData.initTest() //init stuff
+                    val data = getData.initTest() //init stuff
                     //val screens = mutableListOf<Screens>()
 
                     SetupNavGraph(navController = navController, data)
                 }
             }
+        }
+//            override fun onFailure(call: Call<CategoriesDTO?>, t: Throwable) {
+//                println("there was an error")
+//            }
+//        })
+//    }
+//     */
+    }
+
+    @Preview(showBackground = true, widthDp = 320)
+    @Composable
+    fun DefaultPreview() {
+        AudioJournalTheme {
+            HomeScreen(
+                menuItems = listOf(
+                    MenuItem("Listen Live"),
+                    MenuItem("Archived Programs"),
+                    MenuItem("Resume Last Broadcast"),
+                    MenuItem("Favorite Programs"),
+                    MenuItem("Program Schedule"),
+                    MenuItem("Help")
+                ), navController = rememberNavController()
+            )
         }
     }
 }
