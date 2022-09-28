@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
 
