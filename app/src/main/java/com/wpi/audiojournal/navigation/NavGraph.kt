@@ -6,7 +6,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
