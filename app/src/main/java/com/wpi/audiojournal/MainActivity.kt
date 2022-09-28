@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.wpi.audiojournal.navigation.SetupNavGraph
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
@@ -67,6 +68,6 @@ fun DefaultPreview() {
                 MenuItem("Program Schedule"),
                 MenuItem("Help")
             )
-        )
+        , navController = rememberNavController())
     }
 }

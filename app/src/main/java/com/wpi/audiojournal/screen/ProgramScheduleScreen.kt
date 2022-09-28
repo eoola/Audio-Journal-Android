@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.wpi.audiojournal.MenuItem
+import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.navigation.Screens
 import com.wpi.audiojournal.ui.theme.BackButton
 
