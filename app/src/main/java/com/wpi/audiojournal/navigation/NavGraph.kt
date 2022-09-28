@@ -11,7 +11,7 @@ import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.screen.HomeScreen
-import com.wpi.audiojournal.screen.ProgramCategoriesScreen
+import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
 import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.models.CategoriesDTO
