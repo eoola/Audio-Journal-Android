@@ -1,32 +1,34 @@
 package com.wpi.audiojournal.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.MenuItem
-import com.wpi.audiojournal.R
-
+import com.wpi.audiojournal.navigation.Screens
+import com.wpi.audiojournal.ui.theme.BackButton
 
 @Composable
-fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
+fun ProgramSchedule(menuItems: List<MenuItem>, navController: NavController, title:String) {
+
+    BackButton(navController = navController)
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             modifier = Modifier.padding(top = 10.dp),
-            text = stringResource(R.string.audioJournalTitle),
+            text = title,
             style = MaterialTheme.typography.subtitle1.copy(
                 fontWeight = FontWeight.ExtraBold
             )
@@ -47,7 +49,7 @@ fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
                         .fillMaxSize()
                         .size(width = 100.dp, height = 80.dp),
                     shape = CircleShape,
-                    onClick = { navController.navigate(menuItem.title) }
+                    onClick = { navController.navigate("${Screens.programScheduleScreen.route}/${menuItem.title}") },
                 ) {
                     Text(
                         text = menuItem.title,
@@ -55,12 +57,6 @@ fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
                     )
                 }
             }
-        }
-
-        IconButton(onClick = { /*TODO*/ }) {
-            Image(
-                painter = painterResource(R.drawable.color_palette_icon),
-                contentDescription = "Color Palette Icon")
         }
     }
 }
