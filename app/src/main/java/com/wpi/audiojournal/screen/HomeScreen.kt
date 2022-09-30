@@ -13,11 +13,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
 
 @Composable
-fun HomeScreen(menuItems: List<MenuItem>) {
+fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
+    //val navController = rememberNavController()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -45,7 +47,13 @@ fun HomeScreen(menuItems: List<MenuItem>) {
                         .fillMaxSize()
                         .size(width = 100.dp, height = 80.dp),
                     shape = CircleShape,
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                       // if(menuItem.title.equals("Archived Programs")){
+                         //   navController.navigate("Archived Programs")
+                        //}
+                        navController.navigate(menuItem.title)
+
+                    }
                 ) {
                     Text(
                         text = menuItem.title,
