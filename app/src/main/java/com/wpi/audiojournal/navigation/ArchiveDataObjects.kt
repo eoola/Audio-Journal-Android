@@ -1,6 +1,6 @@
 package com.wpi.audiojournal.navigation
 
-import com.wpi.audiojournal.MenuItem
+import com.wpi.audiojournal.models.MenuItem
 
 
 
