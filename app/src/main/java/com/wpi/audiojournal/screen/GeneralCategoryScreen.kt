@@ -37,7 +37,7 @@ fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavControlle
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(items = viewModel.uiState.value.menuItems) { menuItem ->
+        items(items = menuItems) { menuItem ->
             Button(
                 modifier = Modifier
                     .padding(
