@@ -36,7 +36,7 @@ fun SetupNavGraph(navController: NavHostController, data: ArchiveDataObjects){
         }
         composable("moreGeneralCategory/{menuTitle}"){
                 navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
-            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController, title = menuItemTitle.toString())
+            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController)
         }
         composable("category/{menuTitle}"){
            navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
