@@ -89,7 +89,11 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             )
         }
 
-            /*var menuItems = items.getProgramsByCategory(title)
+        composable("Listen Live"){
+            ListenLiveScreen( "Listen Live", navController=navController)
+        }
+
+        /*var menuItems = items.getProgramsByCategory(title)
             //var menuItems = items.getMenuItems(title)
             if (menuItems != null) {
                 ProgramOptionsView(
@@ -145,10 +149,6 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
                 airtime = data.getProgramInformation(menuItemTitle.toString())[0],
                 description = data.getProgramInformation(menuItemTitle.toString())[1]
             )
-        }
-        
-        composable("Listen Live"){
-            ListenLiveScreen( "Listen Live", navController=navController)
         }
     }
 }*/

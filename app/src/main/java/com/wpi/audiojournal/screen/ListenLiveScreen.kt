@@ -1,51 +1,31 @@
 package com.wpi.audiojournal.screen
 
+import android.net.Uri
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.R
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pause
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+
 
 @Composable
 fun ListenLiveScreen(title: String, navController: NavController) {
-    //BACK BUTTON
-
-    Button(
-        modifier = Modifier
-            .padding(
-                horizontal = 5.dp,
-                vertical = 5.dp
-            )
-            //.fillMaxSize()
-            .size(width = 60.dp, height = 50.dp),
-        shape = RoundedCornerShape(30),
-        onClick = { navController.popBackStack() }
-    ) {
-        Text(
-            text = "Back",
-            //fontSize = 7.sp,
-            style = MaterialTheme.typography.body1,
-            textAlign = TextAlign.Center,
-            fontSize = 12.sp,
-            maxLines = 1,
-            modifier = Modifier.padding(horizontal = 0.dp, vertical = 10.dp).fillMaxSize()
-            // style = MaterialTheme.typographye2.subtitl
-        )
-    }
-
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -59,14 +39,15 @@ fun ListenLiveScreen(title: String, navController: NavController) {
             )
         )
 
-        LazyColumn(
-            modifier = Modifier.padding(top = 10.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
+        Image(
+            painter = painterResource(id = R.drawable.loading_screen_mic),
+            contentDescription = "Album Art",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.padding(50.dp).fillMaxWidth(0.5F)
+        )
+        Button(onClick = { /*TODO*/ }) {
+            Icon(Icons.Default.PlayArrow, contentDescription = "Play")
         }
-
 
     }
 }
