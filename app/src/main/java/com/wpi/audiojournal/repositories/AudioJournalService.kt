@@ -10,6 +10,7 @@ import retrofit2.http.GET
 const val BASE_URL = "https://audiojournal.org/wp-json/swws/v1/"
 
 interface AudioJournalService {
+    
 
     @GET("categories")
     fun getCategories(): Call<CategoriesDTO>

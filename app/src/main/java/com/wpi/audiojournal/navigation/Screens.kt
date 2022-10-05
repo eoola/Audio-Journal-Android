@@ -2,11 +2,13 @@ package com.wpi.audiojournal.navigation
 
 sealed class Screens (val route: String){
 
-    object homeScreen : Screens("home")
+    object homeScreen : Screens("Home")
     object loadingScreen: Screens("loading")
-    object programCategoriesScreen: Screens("Archived Programs")
-    object localNewsPaper: Screens("moreGeneralCategory")
-    object generalCatScreen: Screens("category")
+    object archivedScreen: Screens("Archived Programs")
+    object programOptionScreen: Screens("program option")
+    object programDetailScreen: Screens("program detail")
+
+
 
 
     //object screen: Screens(name)
