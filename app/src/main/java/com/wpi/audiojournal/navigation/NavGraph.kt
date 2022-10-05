@@ -1,6 +1,7 @@
 package com.wpi.audiojournal.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,7 +13,9 @@ import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
+
 import com.wpi.audiojournal.view.ProgramDetailView
+import com.wpi.audiojournal.view.*
 
 @Composable
 fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data: CategoriesDTO) {
@@ -76,7 +79,11 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
         /*
         composable("moreGeneralCategory/{menuTitle}"){
                 navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
-            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController)
+
+            val generalCategoryViewModel = GeneralCategoryViewModel()
+            generalCategoryViewModel.loadCategories()
+            GeneralCategoryScreen(generalCategoryViewModel, navController = navController)
+
         }
         composable("category/{menuTitle}"){
            navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")

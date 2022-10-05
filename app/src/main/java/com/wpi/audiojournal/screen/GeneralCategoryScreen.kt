@@ -24,17 +24,20 @@ import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.uikit.Header
+import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 
 @Composable
+
 fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavController) {
     //Header(title = "Program Categories", navController = rememberNavController() )
+
 
     LazyColumn(
         modifier = Modifier.padding(top = 20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(items = menuItems) { menuItem ->
+        items(items = viewModel.uiState.value.menuItems) { menuItem ->
             Button(
                 modifier = Modifier
                     .padding(
