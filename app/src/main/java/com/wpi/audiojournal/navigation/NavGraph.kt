@@ -17,6 +17,7 @@ import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
+import com.wpi.audiojournal.viewmodels.ScheduleViewModel
 
 import com.wpi.audiojournal.view.ProgramDetailView
 import com.wpi.audiojournal.view.*
@@ -55,7 +56,9 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
         }
 
         composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
-            DailySchedule(navController = navController, title = it.arguments?.getString("day"))
+                navbackStackEntry ->
+            val viewModel = ScheduleViewModel()
+            DailySchedule(navController = navController, title = navbackStackEntry.arguments?.getString("day"), viewModel)
         }
 
         composable("Archived Programs") {
