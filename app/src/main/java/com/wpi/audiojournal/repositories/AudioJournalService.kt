@@ -3,6 +3,7 @@ package com.wpi.audiojournal.repositories
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.EpisodeDTO
 import com.wpi.audiojournal.models.ProgramsDTO
+import com.wpi.audiojournal.models.Schedule
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -23,6 +24,9 @@ interface AudioJournalService {
 
     @GET("podcast/{name}")
     fun getEpisodes(@Path("name") name: String): Call<EpisodeDTO>
+
+    @GET("schedule")
+    fun getSchedule(): Call<Schedule>
 
     companion object {
         fun create(): AudioJournalService {

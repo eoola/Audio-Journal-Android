@@ -57,9 +57,9 @@ class GeneralProgramsViewModel {
 
    /* fun loadPrograms(name: String) {
         val categoriesData = audioJournalService.getPrograms(name)
-
         categoriesData.enqueue(object : Callback<ProgramsDTO?> {
             override fun onResponse(call: Call<ProgramsDTO?>, response: Response<ProgramsDTO?>) {
+                val categoriesDTO = response.body()!!
                 uiState.value.menuItems = categoriesDTO.categories.values.map { category ->
                     MenuItem(category.title)
                 }
