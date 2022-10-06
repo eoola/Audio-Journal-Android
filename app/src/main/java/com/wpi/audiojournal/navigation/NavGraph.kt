@@ -9,13 +9,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
 import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.screen.*
-import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 
 @Composable
 fun SetupNavGraph(navController: NavHostController, data: ArchiveDataObjects){
@@ -48,23 +46,6 @@ fun SetupNavGraph(navController: NavHostController, data: ArchiveDataObjects){
 
         composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
             DailySchedule(navController = navController, title = it.arguments?.getString("day"))
-            ), navController = navController)
-        }
-        composable("Program Schedule"){
-            ProgramSchedule(menuItems = listOf(
-                MenuItem("Sunday"),
-                MenuItem("Monday"),
-                MenuItem("Tuesday"),
-                MenuItem("Wednesday"),
-                MenuItem("Thursday"),
-                MenuItem("Friday"),
-                MenuItem("Saturday")
-            ), navController = navController, title = "Program Schedule")
-        }
-
-        composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
-            DailySchedule(navController = navController, title = it.arguments?.getString("day"))
-            ), navController = navController)
         }
         composable("Archived Programs"){
             ProgramCategoriesScreen(menuItems = listOf(
@@ -74,9 +55,7 @@ fun SetupNavGraph(navController: NavHostController, data: ArchiveDataObjects){
         }
         composable("moreGeneralCategory/{menuTitle}"){
                 navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
-            val generalCategoryViewModel = GeneralCategoryViewModel()
-            generalCategoryViewModel.loadCategories()
-            GeneralCategoryScreen(generalCategoryViewModel, navController = navController)
+            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController)
         }
         composable("category/{menuTitle}"){
            navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
