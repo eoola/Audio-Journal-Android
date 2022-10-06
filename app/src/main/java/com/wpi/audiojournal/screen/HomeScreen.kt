@@ -20,6 +20,7 @@ import com.wpi.audiojournal.models.MenuItem
 @Composable
 fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
     //val navController = rememberNavController()
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally

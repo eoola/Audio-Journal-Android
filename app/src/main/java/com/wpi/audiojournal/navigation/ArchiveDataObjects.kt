@@ -1,6 +1,8 @@
 package com.wpi.audiojournal.navigation
 
+
 import com.wpi.audiojournal.models.MenuItem
+
 
 
 
@@ -14,13 +16,13 @@ class ArchiveDataObjects {
         if (screenType.equals("general program categories")){
             for(keyVal in categories){
                 if(keyVal.nodeKey.equals(key)){
-                    menuItems.add(MenuItem(keyVal.valueItem))
+                    //menuItems.add(MenuItem(keyVal.valueItem))
                 }
             }
         }else if (screenType.equals("general programs")){
             for(keyVal in programs){
                 if(keyVal.nodeKey.equals(key)){
-                    menuItems.add(MenuItem(keyVal.valueItem))
+                    //menuItems.add(MenuItem(keyVal.valueItem))
                 }
             }
         }

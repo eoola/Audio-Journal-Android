@@ -18,7 +18,7 @@ import com.wpi.audiojournal.uikit.Header
 @Composable
 fun ProgramCategoriesScreen(menuItems: List<MenuItem>, navController: NavController) {
     Column() {
-        Header(title = "Program Categories", navController = navController)
+        //Header(title = "Program Categories", navController = navController)
 
         Column(
             modifier = Modifier.fillMaxSize(),

@@ -27,8 +27,10 @@ import com.wpi.audiojournal.uikit.Header
 import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 
 @Composable
-fun GeneralCategoryScreen(viewModel: GeneralCategoryViewModel = androidx.lifecycle.viewmodel.compose.viewModel(), navController: NavController) {
-    Header(title = "Program Categories", navController = rememberNavController())
+
+fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavController) {
+    //Header(title = "Program Categories", navController = rememberNavController() )
+
 
     LazyColumn(
         modifier = Modifier.padding(top = 20.dp),

@@ -10,6 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.navigation.SetupNavGraph
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.wpi.audiojournal.models.MenuItem
+import com.wpi.audiojournal.repositories.AudioJournalService
+import com.wpi.audiojournal.screen.HomeScreen
+import com.wpi.audiojournal.screen.GeneralCategoryScreen
+import com.wpi.audiojournal.screen.GeneralProgramsScreen
+import com.wpi.audiojournal.screen.ProgramCategoriesScreen
+
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
 import java.util.*
 
@@ -30,10 +40,16 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     val getData = DataStuff()
-                    val data= getData.initTest() //init stuff
+                    getData.initTest()
+                    val factory= getData.getNav()
+                    val api = AudioJournalService.create()
+                    val data = getData.getCat()//api.getCategories().execute().body()//getData.getCat()
+                    //init stuff
                     //val screens = mutableListOf<Screens>()
 
-                    SetupNavGraph(navController = navController, data)
+                    if (data != null) {
+                        SetupNavGraph(navController = navController, factory, data)
+                    }
                 }
             }
         }
