@@ -7,9 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
+import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
@@ -18,7 +17,6 @@ import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
 import com.wpi.audiojournal.viewmodels.ScheduleViewModel
-
 import com.wpi.audiojournal.view.ProgramDetailView
 import com.wpi.audiojournal.view.*
 
@@ -53,6 +51,15 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
                 MenuItem("Friday"),
                 MenuItem("Saturday")
             ), navController = navController, title = "Program Schedule")
+        composable("home"){
+            HomeScreen(menuItems = listOf(
+                MenuItem("Listen Live"),
+                MenuItem("Archived Programs"),
+                MenuItem("Resume Last Broadcast"),
+                MenuItem("Favorite Programs"),
+                MenuItem("Program Schedule"),
+                MenuItem("Help")
+            ), navController = navController)
         }
 
         composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
@@ -65,6 +72,24 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
             var menuItems = items.getMenuItems("Archived Programs")
             ArchiveCategoriesView(menuItems = menuItems, navController = navController)
             /*
+        composable("Program Schedule"){
+            ProgramSchedule(menuItems = listOf(
+                MenuItem("Sunday"),
+                MenuItem("Monday"),
+                MenuItem("Tuesday"),
+                MenuItem("Wednesday"),
+                MenuItem("Thursday"),
+                MenuItem("Friday"),
+                MenuItem("Saturday")
+            ), navController = navController, title = "Program Schedule")
+        }
+
+        composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
+                navbackStackEntry ->
+            val viewModel = ScheduleViewModel()
+            DailySchedule(navController = navController, title = navbackStackEntry.arguments?.getString("day"), viewModel)
+        }
+        composable("Archived Programs"){
             ProgramCategoriesScreen(menuItems = listOf(
                 MenuItem("Local Newspaper"),
                 MenuItem("Retail Circulars and Sales"),
@@ -99,15 +124,9 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
         }
     }
 }
-
-        /*
         composable("moreGeneralCategory/{menuTitle}"){
                 navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
-
-            val generalCategoryViewModel = GeneralCategoryViewModel()
-            generalCategoryViewModel.loadCategories()
-            GeneralCategoryScreen(generalCategoryViewModel, navController = navController)
-
+            GeneralCategoryScreen(menuItems = data.getMenuItems(menuItemTitle.toString(), "general program categories"), navController = navController)
         }
         composable("category/{menuTitle}"){
            navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
@@ -120,4 +139,4 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
             )
         }
     }
-}*/
+}
