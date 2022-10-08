@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
+import com.wpi.audiojournal.navigation.Screens
 import com.wpi.audiojournal.view.AppColorSchemes
 
 @Composable
@@ -86,7 +87,12 @@ fun ButtonComponents(menuType:String, menuItems: List<MenuItem>, navController: 
                         var nextMenu = ""
                         if (menuType.contains("Home")) {
                             navController.navigate(menuItem.title)
-                        } else {
+                        }
+
+                        else if(menuType.contains("Program Schedule")){
+                            navController.navigate("${Screens.programScheduleScreen.route}/${menuItem.title}")
+                        }
+                        else {
                             nextMenu = g.nextScreen(menuType)
                             navController.navigate("$nextMenu/${menuItem.title}")
                         }

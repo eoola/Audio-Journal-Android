@@ -27,7 +27,7 @@ import com.wpi.audiojournal.uikit.Header
 
 @Composable
 fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavController) {
-    Header(title = "Program Categories", navController = rememberNavController())
+//    Header(title = "Program Categories", navController = rememberNavController())
 
     LazyColumn(
         modifier = Modifier.padding(top = 20.dp),
