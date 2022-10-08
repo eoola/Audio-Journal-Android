@@ -2,16 +2,13 @@ package com.wpi.audiojournal.viewmodels
 
 
 import android.util.Log
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.models.Schedule
 import com.wpi.audiojournal.repositories.AudioJournalService
 import com.wpi.audiojournal.uistates.GeneralScheduleUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.Call
