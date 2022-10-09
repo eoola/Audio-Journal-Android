@@ -84,12 +84,16 @@ fun Header(menuType: String, title: String, navController: NavController,hasBack
                     fontSize = 30.sp
                 )
             } else {
+
                 Text(
-                    modifier = Modifier.padding(top = 10.dp),
-                    text = title,
-                    color = colorResource(id =contentColor),
-                    style = MaterialTheme.typography.h5
+                        modifier = Modifier.padding( horizontal = 20.dp),
+
+                        text = title,
+                        color = colorResource(id =contentColor),
+                        style = MaterialTheme.typography.h5
                 )
+
+
             }
 
 
@@ -105,7 +109,7 @@ fun Header(menuType: String, title: String, navController: NavController,hasBack
 
             if (description != null) {
                 Text(
-                    modifier = Modifier,
+                    modifier = Modifier.padding(horizontal = 20.dp),
                     text = description,
                     color = colorResource(id =contentColor),
 

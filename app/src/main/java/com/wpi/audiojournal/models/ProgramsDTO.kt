@@ -1,3 +1,3 @@
 package com.wpi.audiojournal.models
 
-class ProgramsDTO (val categories: Map<String, Category>)
+class ProgramsDTO (val programs: Map<String, Program>)

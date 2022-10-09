@@ -8,7 +8,7 @@ import com.wpi.audiojournal.navigation.ArchiveDataObjects
 import com.wpi.audiojournal.navigation.KeyValue
 import com.wpi.audiojournal.navigation.KeyValuesMany
 
-class DataStuff {
+/*class DataStuff {
     var factory = MenuItemFactory()
 
     var catMap = HashMap<String, Category>()

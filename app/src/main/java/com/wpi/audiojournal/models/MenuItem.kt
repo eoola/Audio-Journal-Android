@@ -1,6 +1,10 @@
 package com.wpi.audiojournal.models
 
 class MenuItem(
-    val title: String,
+    var title: String,
+    val name: String? = null,
+    val description: String?= null,
+    val url: String?=null,
+    val airdate: String?=null,
     val action: (() -> Void)? = null
 )

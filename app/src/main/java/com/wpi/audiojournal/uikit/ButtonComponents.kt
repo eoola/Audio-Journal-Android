@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.uikit
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,10 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
+import com.wpi.audiojournal.models.MenuType
 import com.wpi.audiojournal.view.AppColorSchemes
 
 @Composable
-fun ButtonComponents(menuType:String, menuItems: List<MenuItem>, navController: NavController, hasColorPallette: Boolean, hasSearch: Boolean, headerSpace: Int, colorsObj: AppColorSchemes){
+fun ButtonComponents(menuType:String,
+                     menuItems: List<MenuItem>,
+                     navController: NavController,
+                     hasColorPallette: Boolean,
+                     hasSearch: Boolean,
+                     headerSpace: Int,
+                     colorsObj: AppColorSchemes,
+                     navDataName: HashMap<String, String>? = null){
     var search = 0
     var buttonsSpace = headerSpace
 
@@ -30,7 +39,7 @@ fun ButtonComponents(menuType:String, menuItems: List<MenuItem>, navController: 
         val bColor = colorResource(id =colorsObj.getBorder())
         var stroke = 0
         if(bColor != null){
-            stroke = 4
+            stroke = 2
         }
         if (hasSearch) {
             //SEARCH BAR Button
@@ -71,10 +80,10 @@ fun ButtonComponents(menuType:String, menuItems: List<MenuItem>, navController: 
                     modifier = Modifier
                         .padding(
                             horizontal = 24.dp,
-                            vertical = 10.dp
+                            vertical = 5.dp
                         )
                         .fillMaxSize()
-                        .size(width = 100.dp, height = 80.dp),
+                        .size(width = 100.dp, height = 85.dp),
                     colors = ButtonDefaults.buttonColors(colorResource(id =colorsObj.getRainbowColor(menuItem.title, menuItems.indexOf(menuItem)))),
                     shape = CircleShape,
                     border = BorderStroke(stroke.dp, bColor),
@@ -82,13 +91,38 @@ fun ButtonComponents(menuType:String, menuItems: List<MenuItem>, navController: 
                         // if(menuItem.title.equals("Archived Programs")){
                         //   navController.navigate("Archived Programs")
                         //}
+
                         var g = LogicalNavigationGraph()
                         var nextMenu = ""
                         if (menuType.contains("Home")) {
+                            Log.d("TEST", "NAV${menuItem.title}")
                             navController.navigate(menuItem.title)
                         } else {
                             nextMenu = g.nextScreen(menuType)
-                            navController.navigate("$nextMenu/${menuItem.title}")
+
+                            if(nextMenu.contains("detail")){
+                                Log.d("TEST", "NAV${menuItem.title}")
+                                navController.navigate("$nextMenu/${menuItem.title.replace(" ","_")}/${menuItem.name}/${menuItem.description}")
+                            }else{
+                                Log.d("TEST", "NAV${menuItem.title}")
+                                navController.navigate("$nextMenu/${menuItem.title.replace(" ","_")}/${menuItem.name}")
+                            }
+
+                            //if(navDataName != null){
+                                /*val name = navDataName[menuItem.title]
+                                if(name != null){
+                                    val nameArr = name.split("~")
+                                    Log.d("TEST", "NAV${menuItem.title}")
+                                    navController.navigate("$nextMenu/${menuItem.title}/${nameArr[0]}")
+                                }else{
+                                    Log.d("TEST", "OHOH no name")
+                                }*/
+
+                            //}else{
+
+
+                           // }
+
                         }
 
 

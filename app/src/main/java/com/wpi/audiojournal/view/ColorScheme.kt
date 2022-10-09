@@ -28,7 +28,7 @@ class AppColorSchemes(){
 
     fun getRainbowColor(itemTitle: String, index:Int): Int {
 
-        if(itemTitle.contains("Search") || itemTitle.contains("Back")){
+        if(itemTitle.contains("Search") || itemTitle.equals("Back")){
             return  R.color.white
         }else{
 
