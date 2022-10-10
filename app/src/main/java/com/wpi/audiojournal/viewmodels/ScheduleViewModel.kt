@@ -1,7 +1,6 @@
 package com.wpi.audiojournal.viewmodels
 
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wpi.audiojournal.models.Schedule
