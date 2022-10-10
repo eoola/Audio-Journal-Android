@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -9,16 +10,19 @@ import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.SplashScreen
-import com.wpi.audiojournal.data.DataStuff
+//import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
 
 import com.wpi.audiojournal.view.ProgramDetailView
 import com.wpi.audiojournal.view.*
+import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
+import com.wpi.audiojournal.viewmodels.GeneralEpisodeViewModel
+import com.wpi.audiojournal.viewmodels.GeneralProgramsViewModel
 
 @Composable
-fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data: CategoriesDTO) {
+fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryViewModel, viewModP: GeneralProgramsViewModel, episodeViewModel: GeneralEpisodeViewModel, progLoaded:Boolean) {//, items: MenuItemFactory) {
     NavHost(navController = navController, startDestination = "loading") {
 
 
@@ -38,8 +42,13 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
             )
         }
         composable("Archived Programs") {
-            var menuItems = items.getMenuItems("Archived Programs")
-            ArchiveCategoriesView(menuItems = menuItems, navController = navController)
+            //var menuItems = items.getCategories()//items.getMenuItems("Archived Programs")
+            //if (menuItems != null) {
+            ArchiveCategoriesView(navController = navController, viewModC)
+            // } else {
+
+            //}
+
             /*
             ProgramCategoriesScreen(menuItems = listOf(
                 MenuItem("Local Newspaper"),
@@ -47,14 +56,54 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
                 MenuItem("Specialty Program")), navController=navController)*/
         }
 
-        composable("program option/{menuTitle}") { navBackStackEntry ->
+
+        composable("program-option/{menuTitle}/{name}") { navBackStackEntry ->
             val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
-            val title = menuItemTitle.toString()
-            var menuItems = items.getMenuItems(title)
-            ProgramOptionsView(menuItems = menuItems, navController = navController, title = title)
+            val title = menuItemTitle.toString().replace("_"," ")
+            val name = navBackStackEntry.arguments?.getString("name").toString()
+            ProgramOptionsView(
+                navController = navController,
+                title = title,
+                name = name,
+                programsViewModel = viewModP,
+                progLoaded = progLoaded
+
+            )
         }
 
-        composable("program detail/{menuTitle}") { navBackStackEntry ->
+        composable("program-detail/{menuTitle}/{name}/{description}") { navBackStackEntry ->
+            val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
+            val title = menuItemTitle.toString().replace("_"," ")
+            val name = navBackStackEntry.arguments?.getString("name").toString()
+            val desc = navBackStackEntry.arguments?.getString("description").toString()
+            Log.d("TEST","Name prog? ${name}")
+            ProgramDetailView(
+                navController = navController,
+                title = title,
+                name = name,
+                episodeViewModel = episodeViewModel,
+                airTime = "",
+                description = desc
+
+            )
+        }
+
+            /*var menuItems = items.getProgramsByCategory(title)
+            //var menuItems = items.getMenuItems(title)
+            if (menuItems != null) {
+                ProgramOptionsView(
+                    menuItems = menuItems,
+                    navController = navController,
+                    title = title
+                )
+            } else {
+
+            }*/
+
+    }
+}
+
+        /*composable("program detail/{menuTitle}") { navBackStackEntry ->
             val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
             val title = menuItemTitle.toString()
             var menuItems = items.getMenuItems(title)
@@ -73,10 +122,11 @@ fun SetupNavGraph(navController: NavHostController, items: MenuItemFactory, data
             )
 
         }
-    }
-}
+    //}
 
-        /*
+//}
+
+
         composable("moreGeneralCategory/{menuTitle}"){
                 navBackStackEntry ->  val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
 

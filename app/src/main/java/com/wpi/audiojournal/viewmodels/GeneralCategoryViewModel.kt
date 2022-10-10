@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.viewmodels
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItem
@@ -8,6 +9,7 @@ import com.wpi.audiojournal.uistates.GeneralCategoryUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,10 +20,12 @@ private val audioJournalService by lazy {
 
 class GeneralCategoryViewModel: ViewModel() {
 
-    private val _uiState = MutableStateFlow(GeneralCategoryUIState())
-    val uiState: StateFlow<GeneralCategoryUIState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(GeneralCategoryUIState())//mutableStateOf(GeneralCategoryUIState())//MutableStateFlow(GeneralCategoryUIState())
+
+    val uiState: StateFlow<GeneralCategoryUIState> = _uiState.asStateFlow() //value//StateFlow<GeneralCategoryUIState> = _uiState.value//.asStateFlow()
 
     fun loadCategories() {
+
         val categoriesData = audioJournalService.getCategories()
 
         categoriesData.enqueue(object : Callback<CategoriesDTO?> {
@@ -30,14 +34,28 @@ class GeneralCategoryViewModel: ViewModel() {
                 response: Response<CategoriesDTO?>
             ) {
                 val categoriesDTO = response.body()!!
-                uiState.value.menuItems = categoriesDTO.categories.values.map { category ->
-                    MenuItem(category.title)
+                _uiState.value.menuItems = categoriesDTO.categories.values.map { category ->
+                    MenuItem(category.title, category.name, category.description)
                 }
+                _uiState.value.categoryList = categoriesDTO.categories.values.map { category -> category
+                }
+
+                _uiState.update {
+                        GeneralCategoryUIState(it.menuItems, it.categoryList)
+                }
+
+
+
             }
 
             override fun onFailure(call: Call<CategoriesDTO?>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
+
+        //_uiState.update {
+        //    GeneralCategoryUIState(it.menuItems, it.categoryList)
+        //}
+
     }
 }

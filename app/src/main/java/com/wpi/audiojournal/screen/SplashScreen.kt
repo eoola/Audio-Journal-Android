@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,11 +19,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
+import com.wpi.audiojournal.models.MenuItemFactory
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navController: NavController){
+
+    /*if(factory.doneLoad == false){
+        Log.d("TEST","FALSE!!")
+        factory.initializeFactory()
+    }*/
+
     LaunchedEffect(key1 = true){
+        //delay(3000)
         delay(3000)
         navController.navigate("home")
     }

@@ -104,7 +104,7 @@ fun GeneralProgramsScreen(menuItems: List<MenuItem>, navController: NavControlle
                     }
                 ) {
                     Text(
-                        text = menuItem.title,
+                        text = menuItem.title!!,
                         style = MaterialTheme.typography.subtitle2
                     )
                 }

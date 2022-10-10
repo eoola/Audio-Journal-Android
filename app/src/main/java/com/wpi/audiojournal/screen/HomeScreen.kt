@@ -52,12 +52,12 @@ fun HomeScreen(menuItems: List<MenuItem>, navController: NavController) {
                        // if(menuItem.title.equals("Archived Programs")){
                          //   navController.navigate("Archived Programs")
                         //}
-                        navController.navigate(menuItem.title)
+                        navController.navigate(menuItem.title!!)
 
                     }
                 ) {
                     Text(
-                        text = menuItem.title,
+                        text = menuItem.title!!,
                         style = MaterialTheme.typography.subtitle2
                     )
                 }

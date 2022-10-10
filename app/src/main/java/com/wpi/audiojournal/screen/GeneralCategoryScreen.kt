@@ -32,7 +32,7 @@ fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavControlle
     //Header(title = "Program Categories", navController = rememberNavController() )
 
 
-    LazyColumn(
+   /* LazyColumn(
         modifier = Modifier.padding(top = 20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -56,5 +56,5 @@ fun GeneralCategoryScreen(menuItems: List<MenuItem>, navController: NavControlle
             }
 
         }
-    }
+    }*/
 }
