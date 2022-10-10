@@ -1,7 +1,6 @@
 package com.wpi.audiojournal.viewmodels
 
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wpi.audiojournal.models.Schedule
@@ -36,19 +35,11 @@ class ScheduleViewModel: ViewModel() {
     response: Response<Schedule?>
    ) {
     val scheduleDTO = response.body()!!
-//    uiState.value.scheduleList = listOf(scheduleDTO)
     _uiState.value.scheduleList = listOf(scheduleDTO)
 
     _uiState.update {
     GeneralScheduleUIState(listOf(scheduleDTO))
     }
-
-    Log.d("body", uiState.value.scheduleList.toString())
-
-//    uiState.value.scheduleList = scheduleDTO. { schedule ->
-//     Schedule(schedule.toString())
-//    }
-
    }
 
    override fun onFailure(call: Call<Schedule?>, t: Throwable) {
@@ -57,62 +48,7 @@ class ScheduleViewModel: ViewModel() {
   })
  }
 
-
-
-
-
-
-
-
-
-
-////    val _state : MutableState<Schedule> = mutableStateOf(emptyList())
-//    private var _getScheduleData: MutableLiveData<Schedule> = MutableLiveData<Schedule>()
-//    var getScheduleData: LiveData<Schedule> = _getScheduleData
-//
-//
-//     fun getScheduleData() = viewModelScope.launch {
-//        val result = scheduleRepository.getScheduleResponse()
-//        when(result){
-//            is Resource.Success<*> ->{
-//                _getScheduleData.value = result.data!!
-//            }
-//        }
-//    }
-
-
-
-
-
-
-
-
- //    val state: StateFlow<List<Schedule>>
-//        get() = _state
-
-//    var isLoading = mutableStateOf(false)
-//    private var _getScheduleData: MutableLiveData<Call<Schedule>> = MutableLiveData<Call<Schedule>>()
-//    var getScheduleData: LiveData<Call<Schedule>> = _getScheduleData
-
-//     suspend fun getScheduleData(): Resource<Call<Schedule>> {
-//        val result = scheduleRepository.getScheduleResponse()
-//        if (result is Resource.Success<*>) {
-//            isLoading.value = true
-//            _getScheduleData.value = result.data!!
-//        }
-//
-//        return result
-//    }
-
-//    init{
-//        viewModelScope.launch {
-//            val scheduleData = scheduleRepository.getScheduleResponse()
-//            _state.value = scheduleData
-//        }
-//    }
-
   init{
     loadSchedule()
 }
-
 }
