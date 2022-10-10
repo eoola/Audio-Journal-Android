@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.HomeScreen
+import com.wpi.audiojournal.screen.ListenLiveScreen
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.SplashScreen
 //import com.wpi.audiojournal.data.DataStuff
@@ -88,7 +89,11 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             )
         }
 
-            /*var menuItems = items.getProgramsByCategory(title)
+        composable("Listen Live"){
+            ListenLiveScreen( "Listen Live", navController=navController)
+        }
+
+        /*var menuItems = items.getProgramsByCategory(title)
             //var menuItems = items.getMenuItems(title)
             if (menuItems != null) {
                 ProgramOptionsView(
