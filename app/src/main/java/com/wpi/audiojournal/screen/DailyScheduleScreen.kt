@@ -88,7 +88,6 @@ fun DailySchedule(navController: NavController, title:String?, viewModel: Schedu
         }
 
 
-        //Sorta works?
         if(tSchedule.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier.padding(top = 90.dp, start = 10.dp),
