@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ListenLiveScreen
@@ -58,7 +57,7 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
                 MenuItem("Thursday"),
                 MenuItem("Friday"),
                 MenuItem("Saturday")
-            ), navController = navController, title = "Program Schedule")
+            ), navController = navController)
         }
 
         composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){

@@ -1,4 +1,4 @@
-package com.wpi.audiojournal.screen
+package com.wpi.audiojournal.view
 
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import com.wpi.audiojournal.models.Category
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.models.MenuType
+import com.wpi.audiojournal.screen.MenuView
 import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 
 @Composable

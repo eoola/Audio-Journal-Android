@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.models.MenuType
+import com.wpi.audiojournal.navigation.Screens
 import com.wpi.audiojournal.view.AppColorSchemes
 
 @Composable
@@ -97,7 +98,11 @@ fun ButtonComponents(menuType:String,
                         if (menuType.contains("Home")) {
                             Log.d("TEST", "NAV${menuItem.title}")
                             navController.navigate(menuItem.title)
-                        } else {
+                        }
+                        else if(menuType.contains("Program Schedule")){
+                            navController.navigate("${Screens.programScheduleScreen.route}/${menuItem.title}")
+                        }
+                        else {
                             nextMenu = g.nextScreen(menuType)
 
                             if(nextMenu.contains("detail")){
