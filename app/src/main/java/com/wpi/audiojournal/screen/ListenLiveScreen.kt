@@ -17,6 +17,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.layout.ContentScale
@@ -88,6 +89,12 @@ fun ListenLiveScreen(title: String, navController: NavController) {
             setMediaItem(mediaItem)
             playWhenReady = true
             prepare()
+        }
+    }
+
+    DisposableEffect(LocalContext.current) {
+        onDispose {
+            exoPlayer.pause()
         }
     }
 
