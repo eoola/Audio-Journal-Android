@@ -4,17 +4,22 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.wpi.audiojournal.models.MenuItem
+import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.screen.HomeScreen
 import com.wpi.audiojournal.screen.ListenLiveScreen
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
+import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
 //import com.wpi.audiojournal.data.DataStuff
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
+import com.wpi.audiojournal.viewmodels.ScheduleViewModel
 
 import com.wpi.audiojournal.view.ProgramDetailView
 import com.wpi.audiojournal.view.*
@@ -42,6 +47,25 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
                 ), navController = navController
             )
         }
+
+        composable("Program Schedule"){
+            ProgramSchedule(menuItems = listOf(
+                MenuItem("Sunday"),
+                MenuItem("Monday"),
+                MenuItem("Tuesday"),
+                MenuItem("Wednesday"),
+                MenuItem("Thursday"),
+                MenuItem("Friday"),
+                MenuItem("Saturday")
+            ), navController = navController)
+        }
+
+        composable("${Screens.programScheduleScreen.route}/{day}", arguments = listOf(navArgument("day") { type = NavType.StringType })){
+                navbackStackEntry ->
+            val viewModel = ScheduleViewModel()
+            DailySchedule(navController = navController, title = navbackStackEntry.arguments?.getString("day"), viewModel)
+        }
+
         composable("Archived Programs") {
             //var menuItems = items.getCategories()//items.getMenuItems("Archived Programs")
             //if (menuItems != null) {

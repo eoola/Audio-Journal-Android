@@ -1,4 +1,4 @@
-package com.wpi.audiojournal.screen
+package com.wpi.audiojournal.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -8,6 +8,7 @@ import com.wpi.audiojournal.models.Category
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.models.MenuType
 import com.wpi.audiojournal.models.Program
+import com.wpi.audiojournal.screen.MenuView
 import com.wpi.audiojournal.viewmodels.GeneralProgramsViewModel
 
 @Composable
