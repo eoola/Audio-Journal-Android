@@ -1,8 +1,6 @@
 package com.wpi.audiojournal.screen
 
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -30,7 +28,6 @@ import com.wpi.audiojournal.viewmodels.ScheduleViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun DailySchedule(navController: NavController, title:String?, viewModel: ScheduleViewModel = viewModel()) {
 
@@ -94,7 +91,7 @@ fun DailySchedule(navController: NavController, title:String?, viewModel: Schedu
         //Sorta works?
         if(tSchedule.isNotEmpty()) {
             LazyColumn(
-                modifier = Modifier.padding(top = 90.dp),
+                modifier = Modifier.padding(top = 90.dp, start = 10.dp),
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.Start
             ) {
@@ -108,55 +105,4 @@ fun DailySchedule(navController: NavController, title:String?, viewModel: Schedu
         }
 
     }
-
-
-//    var test = viewModel.uiState.value
-//
-//    LaunchedEffect(true){
-//        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//        launch{
-//            viewModel.uiState.collectLatest {
-//                test = it
-//            }
-//        }
-//    }
-    Log.d("Test", schedule.scheduleList.toString())
-
-
-    //If the return type (type of data) is a Schedule containing a list of strings, should be easy to plug and pop as seen below
-//    val test: List<String> = listOf("12:00", "aaa")
-//    val testTwo: List<String> = listOf("1:00", "ddd")
-//
-//    val dataList: Schedule = Schedule(Sunday = test, Monday = testTwo, Tuesday = test, Wednesday = test, Thursday = test, Friday = test, Saturday = test)
-//
-
-
-
 }
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-//
-//    if(viewModel.getScheduleData.value?.isNotEmpty() == true){
-//
-//        LazyColumn {
-//            viewModel.getScheduleData.value?.let {
-//                items(it.size, viewModel.getScheduleData.value)
-//        }
-//    }
-
-
-//    Column(
-//        modifier = Modifier.fillMaxSize(),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//            LazyColumn{
-//
-//            }
-//
-//    }
-//}

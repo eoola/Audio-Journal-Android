@@ -9,15 +9,4 @@ sealed class Screens (val route: String){
     object archivedScreen: Screens("Archived Programs")
     object programOptionScreen: Screens("program option")
     object programDetailScreen: Screens("program detail")
-
-
-
-
-    //object screen: Screens(name)
-
-
-
-
-
-
 }
