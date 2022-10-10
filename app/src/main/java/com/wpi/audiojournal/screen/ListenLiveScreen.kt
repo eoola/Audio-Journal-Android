@@ -23,9 +23,31 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 
-
+val uri: Uri = Uri.parse("https://stream-47.zeno.fm/nvbenz3c19duv")
 @Composable
 fun ListenLiveScreen(title: String, navController: NavController) {
+
+    val context = LocalContext.current
+    val playing = remember { mutableStateOf(false) }
+
+    val exoPlayer = remember(context) {
+        ExoPlayer.Builder(context).build().apply {
+            val mediaItem = MediaItem.Builder()
+                .setUri(uri)
+                .build()
+
+            addListener(object : Player.Listener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    playing.value = isPlaying
+                    super.onIsPlayingChanged(isPlaying)
+                }
+            })
+
+            setMediaItem(mediaItem)
+            playWhenReady = true
+            prepare()
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -43,11 +65,30 @@ fun ListenLiveScreen(title: String, navController: NavController) {
             painter = painterResource(id = R.drawable.loading_screen_mic),
             contentDescription = "Album Art",
             contentScale = ContentScale.FillWidth,
-            modifier = Modifier.padding(50.dp).fillMaxWidth(0.5F)
+            modifier = Modifier
+                .padding(50.dp)
+                .fillMaxWidth(0.5F)
         )
-        Button(onClick = { /*TODO*/ }) {
-            Icon(Icons.Default.PlayArrow, contentDescription = "Play")
-        }
+        Button(onClick = toggle(exoPlayer)) {
+            if (playing.value) {
+                Icon(Icons.Default.Pause, contentDescription = "Pause")
+            } else {
+                Icon(Icons.Default.PlayArrow, contentDescription = "Play")
+            }
 
+        }
+    }
+}
+
+fun toggle(player: ExoPlayer): () -> Unit {
+    player.apply {
+        return fun () {
+            if (isPlaying) {
+                pause()
+            } else {
+                seekToDefaultPosition()
+                play()
+            }
+        }
     }
 }
