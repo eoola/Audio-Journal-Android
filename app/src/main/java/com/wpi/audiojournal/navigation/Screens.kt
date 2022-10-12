@@ -10,6 +10,7 @@ sealed class Screens (val route: String){
     object programOptionScreen: Screens("program-option")
     object programDetailScreen: Screens("program-detail")
     object listenLiveScreen: Screens("Listen Live")
+    object mediaPlay: Screens("media-player")
 
     //object screen: Screens(name)
 }
