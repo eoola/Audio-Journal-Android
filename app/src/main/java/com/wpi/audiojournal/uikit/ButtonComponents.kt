@@ -108,7 +108,10 @@ fun ButtonComponents(menuType:String,
                             if(nextMenu.contains("detail")){
                                 Log.d("TEST", "NAV${menuItem.title}")
                                 navController.navigate("$nextMenu/${menuItem.title.replace(" ","_")}/${menuItem.name}/${menuItem.description}")
-                            }else{
+                            }else if(nextMenu.contains("media")){
+                                navController.navigate("$nextMenu/${menuItem.title.replace(" ","_").replace("/", "~")}/${menuItem.url!!.replace("/", "~")}")
+
+                            } else{
                                 Log.d("TEST", "NAV${menuItem.title}")
                                 navController.navigate("$nextMenu/${menuItem.title.replace(" ","_")}/${menuItem.name}")
                             }

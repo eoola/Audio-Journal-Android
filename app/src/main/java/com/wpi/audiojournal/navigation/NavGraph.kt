@@ -117,6 +117,13 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             ListenLiveScreen( "Listen Live", navController=navController)
         }
 
+        composable("media-player/{menuTitle}/{uriLink}"){navBackStackEntry ->
+            val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
+            val title = menuItemTitle.toString().replace("_"," ").replace("~", "/")
+            val uriLink = navBackStackEntry.arguments?.getString("uriLink").toString().replace("~", "/").replace("http:", "https:")
+            MediaPlayerView(title = title, navController = navController, uriString = uriLink)
+        }
+
         /*var menuItems = items.getProgramsByCategory(title)
             //var menuItems = items.getMenuItems(title)
             if (menuItems != null) {
