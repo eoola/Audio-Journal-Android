@@ -11,7 +11,7 @@ import androidx.navigation.navArgument
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.screen.HomeScreen
-import com.wpi.audiojournal.screen.ListenLiveScreen
+import com.wpi.audiojournal.screen.ListenLiveView
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
@@ -114,7 +114,7 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
         }
 
         composable("Listen Live"){
-            ListenLiveScreen( "Listen Live", navController=navController)
+            ListenLiveView( "Listen Live", navController=navController)
         }
 
         composable("media-player/{menuTitle}/{uriLink}"){navBackStackEntry ->

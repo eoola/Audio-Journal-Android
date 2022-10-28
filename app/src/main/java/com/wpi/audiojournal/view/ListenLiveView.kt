@@ -13,26 +13,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
+import com.wpi.audiojournal.Controls
+import com.wpi.audiojournal.LiveControls
+import com.wpi.audiojournal.Player
 import com.wpi.audiojournal.view.AppColorSchemes
 
 val uri: Uri = Uri.parse("https://stream-47.zeno.fm/nvbenz3c19duv")
 @Composable
-fun ListenLiveScreen(title: String, navController: NavController) {
+fun ListenLiveView(title: String, navController: NavController) {
 
     var colorsObj = AppColorSchemes()
 
@@ -69,35 +61,6 @@ fun ListenLiveScreen(title: String, navController: NavController) {
         )
     }
 
-
-    val context = LocalContext.current
-    val playing = remember { mutableStateOf(false) }
-
-    val exoPlayer = remember(context) {
-        ExoPlayer.Builder(context).build().apply {
-            val mediaItem = MediaItem.Builder()
-                .setUri(uri)
-                .build()
-
-            addListener(object : Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    playing.value = isPlaying
-                    super.onIsPlayingChanged(isPlaying)
-                }
-            })
-
-            setMediaItem(mediaItem)
-            playWhenReady = true
-            prepare()
-        }
-    }
-
-    DisposableEffect(LocalContext.current) {
-        onDispose {
-            exoPlayer.pause()
-        }
-    }
-
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -118,26 +81,8 @@ fun ListenLiveScreen(title: String, navController: NavController) {
                 .padding(50.dp)
                 .fillMaxWidth(0.5F)
         )
-        Button(onClick = toggle(exoPlayer)) {
-            if (playing.value) {
-                Icon(Icons.Default.Pause, contentDescription = "Pause")
-            } else {
-                Icon(Icons.Default.PlayArrow, contentDescription = "Play")
-            }
-
-        }
-    }
-}
-
-fun toggle(player: ExoPlayer): () -> Unit {
-    player.apply {
-        return fun () {
-            if (isPlaying) {
-                pause()
-            } else {
-                seekToDefaultPosition()
-                play()
-            }
+        Player(uri) {
+            LiveControls(it)
         }
     }
 }
