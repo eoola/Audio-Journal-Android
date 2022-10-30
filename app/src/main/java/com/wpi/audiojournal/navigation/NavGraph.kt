@@ -11,7 +11,6 @@ import androidx.navigation.navArgument
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.DailySchedule
 import com.wpi.audiojournal.screen.HomeScreen
-import com.wpi.audiojournal.screen.ListenLiveView
 import com.wpi.audiojournal.screen.ProgramCategoriesScreen
 import com.wpi.audiojournal.screen.ProgramSchedule
 import com.wpi.audiojournal.screen.SplashScreen
@@ -19,13 +18,8 @@ import com.wpi.audiojournal.screen.SplashScreen
 import com.wpi.audiojournal.models.CategoriesDTO
 import com.wpi.audiojournal.models.MenuItemFactory
 import com.wpi.audiojournal.screen.*
-import com.wpi.audiojournal.viewmodels.ScheduleViewModel
-
-import com.wpi.audiojournal.view.ProgramDetailView
 import com.wpi.audiojournal.view.*
-import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
-import com.wpi.audiojournal.viewmodels.GeneralEpisodeViewModel
-import com.wpi.audiojournal.viewmodels.GeneralProgramsViewModel
+import com.wpi.audiojournal.viewmodels.*
 
 @Composable
 fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryViewModel, viewModP: GeneralProgramsViewModel, episodeViewModel: GeneralEpisodeViewModel, progLoaded:Boolean) {//, items: MenuItemFactory) {
@@ -114,7 +108,9 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
         }
 
         composable("Listen Live"){
-            ListenLiveView( "Listen Live", navController=navController)
+            navbackStackEntry ->
+            val viewModel = LivestreamViewModel()
+            ListenLiveView( "Listen Live", navController=navController, viewModel)
         }
 
         composable("media-player/{menuTitle}/{uriLink}"){navBackStackEntry ->
