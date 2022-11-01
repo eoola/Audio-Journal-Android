@@ -1,10 +1,6 @@
 package com.wpi.audiojournal.models
 
-class MenuItem(
-    var title: String,
-    val name: String? = null,
-    val description: String?= null,
-    val url: String?=null,
-    val airdate: String?=null,
-    val action: (() -> Void)? = null
-)
+import com.wpi.audiojournal.navigation.Navigable
+import com.wpi.audiojournal.navigation.Titled
+
+data class MenuItem (override val title: String, override val uri: String) : Navigable, Titled
