@@ -1,6 +1,5 @@
 package com.wpi.audiojournal.screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,7 +10,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
-import com.wpi.audiojournal.models.MenuItemFactory
+import com.wpi.audiojournal.ui.theme.Blue
 import kotlinx.coroutines.delay
 
 @Composable
@@ -38,7 +36,7 @@ fun SplashScreen(navController: NavController){
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(color = colorResource(R.color.blue))){
+        .background(color = Blue)){
         Column (verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = 30.sp, fontWeight = FontWeight.Bold)

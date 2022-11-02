@@ -1,13 +1,5 @@
 package com.wpi.audiojournal.data
 
-import com.wpi.audiojournal.models.CategoriesDTO
-import com.wpi.audiojournal.models.Category
-import com.wpi.audiojournal.models.MenuItemFactory
-import com.wpi.audiojournal.models.ScreenNavigationMap
-import com.wpi.audiojournal.navigation.ArchiveDataObjects
-import com.wpi.audiojournal.navigation.KeyValue
-import com.wpi.audiojournal.navigation.KeyValuesMany
-
 /*class DataStuff {
     var factory = MenuItemFactory()
 

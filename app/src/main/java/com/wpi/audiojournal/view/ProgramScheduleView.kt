@@ -6,9 +6,10 @@ import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
 
+
 @Composable
-fun HomeView(menuItems: List<MenuItem>, navController: NavController) {
-    PageSkeleton(header = "Audio Journal") {
+fun ProgramScheduleView(menuItems: List<MenuItem>, navController: NavController) {
+    PageSkeleton(header = "Program Schedule") {
         Menu(menuItems = menuItems, navController = navController)
     }
 }

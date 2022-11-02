@@ -3,9 +3,8 @@ package com.wpi.audiojournal.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wpi.audiojournal.models.Schedule
 import com.wpi.audiojournal.repositories.AudioJournalService
-import com.wpi.audiojournal.uistates.GeneralScheduleUIState
+import com.wpi.audiojournal.view.uistates.GeneralScheduleUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -29,10 +28,10 @@ class ScheduleViewModel: ViewModel() {
   val categoriesData = audioJournalService.getSchedule()
 
 
-  categoriesData.enqueue(object : Callback<Schedule?> {
+  categoriesData.enqueue(object : Callback<Map<String, Map<String, String>>?> {
    override fun onResponse(
-    call: Call<Schedule?>,
-    response: Response<Schedule?>
+    call: Call<Map<String, Map<String, String>>?>,
+    response: Response<Map<String, Map<String, String>>?>
    ) {
     val scheduleDTO = response.body()!!
     _uiState.value.scheduleList = listOf(scheduleDTO)
@@ -42,8 +41,8 @@ class ScheduleViewModel: ViewModel() {
     }
    }
 
-   override fun onFailure(call: Call<Schedule?>, t: Throwable) {
-
+   override fun onFailure(call: Call<Map<String, Map<String, String>>?>, t: Throwable) {
+    TODO("Not yet implemented")
    }
   })
  }
