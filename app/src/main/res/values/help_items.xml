@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="ajo_info">Audio Journal Info</string>
+        <string name="med_player">Media Player</string>
+        <string name="find_programs_browse">Finding Programs with the Browsing Menu</string>
+        <string name="find_programs_search">Finding Programs with the Search Bar</string>
+        <string name="find_programs_voice">Finding Programs with Search By Voice</string>
+        <string name="favorites">Favoriting Programs</string>
+        <string name="color_palette">Color Palette Changer</string>
+
+
+</resources>

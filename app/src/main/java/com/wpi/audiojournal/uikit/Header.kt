@@ -36,7 +36,7 @@ fun Header(menuType: String, title: String, navController: NavController,hasBack
         if(bColor != null){
             stroke = 4
         }
-        if (hasBackButton) {
+        /*if (hasBackButton) {
             val backColor = colorsObj.getRainbowColor("Back", -1)
             Button(
                 modifier = Modifier
@@ -63,7 +63,7 @@ fun Header(menuType: String, title: String, navController: NavController,hasBack
                         .fillMaxSize()
                 )
             }
-        }
+        }*/
     }
 
         Column(
@@ -86,7 +86,7 @@ fun Header(menuType: String, title: String, navController: NavController,hasBack
             } else {
 
                 Text(
-                        modifier = Modifier.padding( horizontal = 20.dp),
+                        modifier = Modifier.padding( horizontal = 20.dp, vertical = 20.dp),
 
                         text = title,
                         color = colorResource(id =contentColor),

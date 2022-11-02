@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.navigation
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -27,6 +28,7 @@ import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 import com.wpi.audiojournal.viewmodels.GeneralEpisodeViewModel
 import com.wpi.audiojournal.viewmodels.GeneralProgramsViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryViewModel, viewModP: GeneralProgramsViewModel, episodeViewModel: GeneralEpisodeViewModel, progLoaded:Boolean) {//, items: MenuItemFactory) {
     NavHost(navController = navController, startDestination = "loading") {
@@ -35,7 +37,7 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
         composable("loading") {
             SplashScreen(navController = navController)
         }
-        composable("home") {
+        composable("Home") {
             HomeView(
                 menuItems = listOf(
                     MenuItem("Listen Live"),
@@ -45,6 +47,12 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
                     MenuItem("Program Schedule"),
                     MenuItem("Help")
                 ), navController = navController
+            )
+        }
+
+        composable("Help") {
+            HelpMenuView(
+                navController = navController
             )
         }
 
@@ -86,6 +94,7 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
             val title = menuItemTitle.toString().replace("_"," ")
             val name = navBackStackEntry.arguments?.getString("name").toString()
+            viewModP.uiState.value.menuItems= emptyList()
             ProgramOptionsView(
                 navController = navController,
                 title = title,
@@ -102,6 +111,7 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             val name = navBackStackEntry.arguments?.getString("name").toString()
             val desc = navBackStackEntry.arguments?.getString("description").toString()
             Log.d("TEST","Name prog? ${name}")
+            episodeViewModel.uiState.value.menuItems = emptyList()
             ProgramDetailView(
                 navController = navController,
                 title = title,
@@ -122,6 +132,12 @@ fun SetupNavGraph(navController: NavHostController, viewModC: GeneralCategoryVie
             val title = menuItemTitle.toString().replace("_"," ").replace("~", "/")
             val uriLink = navBackStackEntry.arguments?.getString("uriLink").toString().replace("~", "/").replace("http:", "https:")
             MediaPlayerView(title = title, navController = navController, uriString = uriLink)
+        }
+
+        composable("help-info/{menuTitle}/{name}"){
+            navBackStackEntry ->   val menuItemTitle = navBackStackEntry.arguments?.getString("menuTitle")
+            val title = menuItemTitle.toString().replace("_"," ").replace("~", "/")
+            HelpInfoView(title = title, navController = navController)
         }
 
         /*var menuItems = items.getProgramsByCategory(title)

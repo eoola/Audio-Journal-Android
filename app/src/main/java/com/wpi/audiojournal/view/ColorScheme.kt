@@ -5,11 +5,12 @@ import androidx.compose.ui.res.colorResource
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.models.MenuItem
 
-class ColorScheme(val colors: List<Int>, val background: Int, val content: Int, val borders: Int = -1)
+class ColorScheme(val colors: List<Int>, val background: Int, val content: Int, val borders: Int = -1, val boxBackground: Int)
 
 class AppColorSchemes(){
-    var list1 = listOf<Int>(R.color.purple, R.color.salmon, R.color.orange, R.color.yellow, R.color.teal, R.color.blue)
-    var scheme1 = ColorScheme(list1,R.color.gray, R.color.black, R.color.black)
+    var list1 = listOf(R.color.purple, R.color.salmon, R.color.orange, R.color.yellow, R.color.teal, R.color.blue)
+    var scheme1 = ColorScheme(list1,R.color.gray, R.color.black, R.color.black, R.color.white)
+
 
     /*fun initColorSchemes(){
         var colorList1 = mutableListOf<Int>();
@@ -28,7 +29,7 @@ class AppColorSchemes(){
 
     fun getRainbowColor(itemTitle: String, index:Int): Int {
 
-        if(itemTitle.contains("Search") || itemTitle.equals("Back")){
+        if(itemTitle.contains("Search Programs") || itemTitle.equals("Back")){
             return  R.color.white
         }else{
 
@@ -36,6 +37,10 @@ class AppColorSchemes(){
             return color
         }
 
+    }
+
+    fun getBackgroundBox():Int{
+        return scheme1.boxBackground
     }
 
     fun getBackground():Int{

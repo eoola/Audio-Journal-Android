@@ -28,6 +28,8 @@ class GeneralEpisodeViewModel {
 
         val episodesData = audioJournalService.getEpisodes(program)
 
+
+
         episodesData.enqueue(object : Callback<EpisodeDTO?> {
             override fun onResponse(call: Call<EpisodeDTO?>, response: Response<EpisodeDTO?>) {
                 val episodesDTO = response.body()!!

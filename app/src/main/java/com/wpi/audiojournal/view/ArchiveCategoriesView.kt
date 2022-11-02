@@ -1,6 +1,8 @@
 package com.wpi.audiojournal.view
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,8 +17,14 @@ import com.wpi.audiojournal.viewmodels.GeneralCategoryViewModel
 fun ArchiveCategoriesView( navController: NavController, categoryViewModel:GeneralCategoryViewModel){//(menuItems: List<MenuItem>, navController: NavController) {
 
     //val categoryViewModel = GeneralCategoryViewModel()
+
     categoryViewModel.loadCategories()
+
     val categories by categoryViewModel.uiState.collectAsState()
+    if(categories.menuItems.isEmpty()){
+        DataLoadSplashScreen()
+
+    }else{
     var menuItems: List<MenuItem> = listOf()
     //var catList: List<Category> = listOf()
    // val catHash = HashMap<String, String>()
@@ -39,16 +47,20 @@ fun ArchiveCategoriesView( navController: NavController, categoryViewModel:Gener
 
     Log.d("TEST", menuItems.size.toString())
 
-    MenuView(
-        screenType = "Archived",
-        title = "Program Categories",
-        navController = navController,
-        hasBackButton = true,
-        hasFavorites = false,
-        menuItems = menuItems,
-        hasColorPalette = false,
-        hasSearch = true,
-        headerSpace = 100
-       // navData= catHash
-    )
+
+        MenuView(
+            screenType = "Archived",
+            title = "Program Categories",
+            navController = navController,
+            hasBackButton = true,
+            hasFavorites = false,
+            menuItems = menuItems,
+            hasColorPalette = false,
+            hasSearch = true,
+            headerSpace = 100
+            // navData= catHash
+        )
+    }
+
+
 }

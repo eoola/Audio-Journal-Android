@@ -9,6 +9,9 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -109,8 +112,18 @@ fun Controls(player: Player) {
         )
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            IconButton(onClick = { seek(position.minus(10000)) }) {
-                Icon(Icons.Default.ChevronLeft, "Rewind Ten Seconds")
+            IconButton(onClick = { seek(position.minus(60000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronLeft, "Rewind Sixty Seconds")
+                    Text( text = "60 sec", textAlign = TextAlign.Center)
+                }
+            }
+            IconButton(onClick = { seek(position.minus(30000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds")
+                    Text( text = "30 sec", textAlign = TextAlign.Center)
+                }
+
             }
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
@@ -118,8 +131,19 @@ fun Controls(player: Player) {
                 else
                     Icon(Icons.Default.PlayArrow, "Play")
             }
-            IconButton(onClick = { seek(position.plus(10000)) }) {
-                Icon(Icons.Default.ChevronRight, "Skip Ten Seconds")
+            IconButton(onClick = { seek(position.plus(30000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronRight, "Skip Ten Seconds")
+                    Text(text = "30 sec", textAlign = TextAlign.Center)
+                }
+
+            }
+
+            IconButton(onClick = { seek(position.plus(60000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds")
+                    Text( text = "60 sec", textAlign = TextAlign.Center)
+                }
             }
         }
 

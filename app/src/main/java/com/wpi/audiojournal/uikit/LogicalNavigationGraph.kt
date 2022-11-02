@@ -10,6 +10,8 @@ class LogicalNavigationGraph {
             next = "program-detail"
         }else if(current.contains("detail")){
             next = "media-player"
+        }else if(current.equals("Help")){
+            next = "help-info"
         }
         /*else if (current.contains("programs")){
             next = "detail programs"

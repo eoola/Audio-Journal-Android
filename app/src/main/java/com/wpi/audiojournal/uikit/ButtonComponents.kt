@@ -55,7 +55,7 @@ fun ButtonComponents(menuType:String,
                         )
                         .fillMaxWidth()
                         .size(width = 300.dp, height = 40.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(id =colorsObj.getRainbowColor("Search", -1))),
+                    colors = ButtonDefaults.buttonColors(colorResource(id =colorsObj.getRainbowColor("Search Programs", -1))),
                     shape = CircleShape,
                     border = BorderStroke(stroke.dp, bColor),
                     onClick = { /*TODO*/ }
@@ -95,7 +95,7 @@ fun ButtonComponents(menuType:String,
 
                         var g = LogicalNavigationGraph()
                         var nextMenu = ""
-                        if (menuType.contains("Home")) {
+                        if (menuType.contains("Home") ) {
                             Log.d("TEST", "NAV${menuItem.title}")
                             navController.navigate(menuItem.title)
                         }
