@@ -30,23 +30,25 @@ fun SetupNavGraph(navController: NavHostController) {
         }
 
         composable("program-schedule"){
-            ProgramScheduleView(menuItems = listOf(
-                MenuItem("Sunday", "program-schedule/Sunday"),
-                MenuItem("Monday", "program-schedule/Monday"),
-                MenuItem("Tuesday", "program-schedule/Tuesday"),
-                MenuItem("Wednesday", "program-schedule/Wednesday"),
-                MenuItem("Thursday", "program-schedule/Thursday"),
-                MenuItem("Friday", "program-schedule/Friday"),
-                MenuItem("Saturday", "program-schedule/Saturday")
-            ), navController = navController)
+            ProgramScheduleView(menuItems =
+                listOf(
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ).map{ day -> MenuItem(day, "program-schedule/$day") },
+                navController = navController)
         }
 
         composable("program-schedule/{day}"){ navbackStackEntry ->
-            DailyScheduleView(navbackStackEntry.arguments?.getString("day") ?: "")
+            DailyScheduleView(navbackStackEntry.arguments?.getString("day") ?: "Sunday")
         }
 
         composable("archived-programs") {
-            ArchiveCategoriesView(navController = navController)
+            ArchiveView(navController = navController)
         }
 
 

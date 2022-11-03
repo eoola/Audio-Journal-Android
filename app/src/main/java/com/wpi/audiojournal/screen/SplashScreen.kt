@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.theme.Blue
+import com.wpi.audiojournal.ui.theme.Salmon
 import kotlinx.coroutines.delay
 
 @Composable
@@ -46,8 +47,8 @@ fun SplashScreen(navController: NavController){
                 contentDescription = "Microphone",
                 Modifier.weight(1f),
                 contentScale = ContentScale.FillHeight
-                )
-            CircularProgressIndicator()
+            )
+            CircularProgressIndicator(color = Salmon)
             Text(text = "Made in Cooperation with", textAlign = TextAlign.Center, fontSize = 30.sp)
             Modifier.padding(40.dp)
             Image(

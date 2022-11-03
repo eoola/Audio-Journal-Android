@@ -6,7 +6,6 @@ import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
 
-
 @Composable
 fun ProgramScheduleView(menuItems: List<MenuItem>, navController: NavController) {
     PageSkeleton(header = "Program Schedule") {
