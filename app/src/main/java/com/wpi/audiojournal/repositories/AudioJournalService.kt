@@ -1,41 +1,45 @@
 package com.wpi.audiojournal.repositories
 
-import com.wpi.audiojournal.models.CategoriesDTO
-import com.wpi.audiojournal.models.EpisodeDTO
-import com.wpi.audiojournal.models.ProgramsDTO
-import retrofit2.Call
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.wpi.audiojournal.models.*
+import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 const val BASE_URL = "https://audiojournal.org/wp-json/swws/v1/"
 
-interface AudioJournalService {
-    
+interface AudioJournalServiceInterface {
 
+    @Nested("categories")
+    @Mapped
     @GET("categories")
-    fun getCategories(): Call<CategoriesDTO>
+    suspend fun getCategories(): Response<List<Category>>
 
+    @Nested("programs")
+    @Mapped
     @GET("category/{name}")
-    fun getPrograms(@Path("name") name: String): Call<ProgramsDTO>
+    suspend fun getPrograms(@Path("name") name: String): Response<List<Program>>
 
     @GET("podcast/{name}")
-    fun getEpisodes(@Path("name") name: String): Call<EpisodeDTO>
+    suspend fun getProgram(@Path("name") name: String): Response<Program>
 
     @GET("schedule")
-    fun getSchedule(): Call<Map<String, Map<String, String>>>
+    suspend fun getSchedule(): Response<Map<String, Map<String, String>>>
+}
 
-    companion object {
-        fun create(): AudioJournalService {
-            val retrofit = Retrofit.Builder()
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL)
-                .build()
+val moshi: Moshi = Moshi.Builder()
+    .add(NestedFactory.INSTANCE)
+    .add(MappedFactory.INSTANCE)
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
-            return retrofit.create(AudioJournalService::class.java)
-        }
-    }
+val AudioJournalService: AudioJournalServiceInterface by lazy {
+    Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .baseUrl(BASE_URL)
+        .build()
+        .create(AudioJournalServiceInterface::class.java)
 }
