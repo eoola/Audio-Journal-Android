@@ -7,7 +7,6 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 
-
 private fun DarkColorPalette(colorScheme: ColorScheme) = darkColors(
     primary = colorScheme.getRainbowColor(0),
     primaryVariant = colorScheme.getRainbowColor(1),

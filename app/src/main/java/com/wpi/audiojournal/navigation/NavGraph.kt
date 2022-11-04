@@ -85,5 +85,26 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
             val uriLink = navBackStackEntry.arguments?.getDecodedString("uriLink") ?: ""
             MediaPlayerView(title = title, uriString = uriLink)
         }
+
+
+        composable("help") {
+            HelpMenuView(
+                menuItems = listOf(
+                    MenuItem("Audio Journal Info", "help-info/audio-journal-info"),
+                    MenuItem("Media Player", "help-info/media-player"),
+                    MenuItem("Finding Programs with the Browsing Menu", "help-info/browsing-menu"),
+                    MenuItem("Finding Programs with the Search Bar", "help-info/search-bar"),
+                    MenuItem("Finding Programs with Search By Voice", "help-info/search-by-voice"),
+                    MenuItem("Favoriting Programs", "help-info/favoriting"),
+                    MenuItem("Color Palette Changer", "help-info/color-changer")
+                ), navController = navController
+            )
+        }
+        
+        composable("help-info/{screenId}"){navBackStackEntry ->
+            val screenID = navBackStackEntry.arguments?.getDecodedString("screenId") ?: ""
+            HelpInfoView(uriString = screenID)
+            
+        }
     }
 }

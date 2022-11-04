@@ -1,10 +1,7 @@
 package com.wpi.audiojournal.ui.component
 
 import android.net.Uri
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Slider
@@ -17,6 +14,8 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -115,10 +114,21 @@ fun Controls(player: Player) {
             value = (position.toFloat()/maxPosition.toFloat()).takeUnless { it.isNaN() } ?: 0F,
             onValueChange = ::seek
         )
+        val skipTextSize = 10.sp
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            IconButton(onClick = { seek(position.minus(10000)) }) {
-                Icon(Icons.Default.ChevronLeft, "Rewind Ten Seconds")
+            IconButton(onClick = { seek(position.minus(60000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronLeft, "Rewind Sixty Seconds")
+                    Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
+                }
+            }
+            IconButton(onClick = { seek(position.minus(30000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds")
+                    Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
+                }
+
             }
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
@@ -126,8 +136,19 @@ fun Controls(player: Player) {
                 else
                     Icon(Icons.Default.PlayArrow, "Play")
             }
-            IconButton(onClick = { seek(position.plus(10000)) }) {
-                Icon(Icons.Default.ChevronRight, "Skip Ten Seconds")
+            IconButton(onClick = { seek(position.plus(30000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronRight, "Skip Ten Seconds")
+                    Text(text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
+                }
+
+            }
+
+            IconButton(onClick = { seek(position.plus(60000)) }) {
+                Column() {
+                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds")
+                    Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
+                }
             }
         }
 

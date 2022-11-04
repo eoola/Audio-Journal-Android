@@ -34,5 +34,10 @@ fun PageSkeleton (
             )
         }
         content(this)
+
+
+
     }
+
+
 }
