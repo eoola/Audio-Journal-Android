@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     //val screens = mutableListOf<Screens>()
 
                     //if (data != null) {
-                    SetupNavGraph(navController = navController)
+                    SetupNavGraph(navController = navController, setColorScheme = it)
                    // }
                 }
             }

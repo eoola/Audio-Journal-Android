@@ -6,10 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.SplashScreen
+import com.wpi.audiojournal.ui.theme.ColorScheme
 import com.wpi.audiojournal.view.*
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme) -> Unit) {
     NavHost(navController = navController, startDestination = "loading") {
 
 
@@ -25,7 +26,9 @@ fun SetupNavGraph(navController: NavHostController) {
                     MenuItem("Favorite Programs", ""),
                     MenuItem("Program Schedule", "program-schedule"),
                     MenuItem("Help", "help")
-                ), navController = navController
+                ),
+                navController = navController,
+                setColorScheme = setColorScheme
             )
         }
 
