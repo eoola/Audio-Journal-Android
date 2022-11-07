@@ -20,12 +20,12 @@ fun PageSkeleton (
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column (
-        modifier.fillMaxSize().background(LocalColorScheme.current.background),
+        modifier.fillMaxSize().background(LocalColorScheme.current.background).padding(12.dp),
         horizontalAlignment = horizontalAlignment
     ) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text(
-                modifier = Modifier.padding(top = 10.dp),
+                modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
                 text = header,
                 style = MaterialTheme.typography.h5.copy(
                     fontWeight = FontWeight.ExtraBold,
@@ -34,9 +34,6 @@ fun PageSkeleton (
             )
         }
         content(this)
-
-
-
     }
 
 
