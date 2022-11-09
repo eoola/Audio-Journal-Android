@@ -41,6 +41,24 @@ val colorSchemes = listOf(
         Teal,
         Color.Black,
         Color.Black
+    ),
+    ColorScheme(
+        listOf(Color.White),
+        Yellow,
+        Color.Black,
+        Color.Black
+    ),
+    ColorScheme(
+        listOf(Color.White),
+        Brown,
+        Color.Black,
+        Color.Black
+    ),
+    ColorScheme(
+        listOf(Color.Black),
+        Color.White,
+        Color.White,
+        Color.Black
     )
 )
 

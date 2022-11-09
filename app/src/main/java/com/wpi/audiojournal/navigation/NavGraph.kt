@@ -106,5 +106,9 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
             HelpInfoView(uriString = screenID)
             
         }
+        composable("search_button"){
+            SearchProgramsView(navController = navController, title = "Search Programs")
+            //ProgramLoad1(navController = navController, title = "Search Programs")
+        }
     }
 }
