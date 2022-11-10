@@ -59,4 +59,3 @@ class MainActivity : ComponentActivity() {
 
 
 }
-var archiveTable = mutableMapOf<Category, List<Program>>()

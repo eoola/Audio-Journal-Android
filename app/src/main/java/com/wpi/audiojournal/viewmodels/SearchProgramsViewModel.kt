@@ -43,8 +43,9 @@ class SearchProgramsViewModel(programList: List<Program>): ViewModel() {
     }
 }
 
-data class MenuItemSearchState(val searchText:String="",
-                               val list: List<Program>
+data class MenuItemSearchState(
+    var searchText:String="",
+    val list: List<Program>
 )
 
 sealed class UserAction{

@@ -16,25 +16,37 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.viewmodels.SearchProgramsViewModel
 import com.wpi.audiojournal.viewmodels.UserAction
+import com.wpi.audiojournal.viewmodels.VoiceInputViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Search(
     navController: NavController,
-    viewModel: SearchProgramsViewModel
+    searchViewModel: SearchProgramsViewModel
 ){
-    val state = viewModel.state
+    //VoiceInput(voiceViewModel)
+
+
+    var state = searchViewModel.state
+
+    /*if(voiceViewModel.state.text != null){
+        state.searchText = voiceViewModel.state.text!!
+    }*/
+
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
     SearchBar(onInputValueChange = { newText ->
-        viewModel.onAction(
+        searchViewModel.onAction(
             UserAction.TextFieldInput(newText)
         )
+
+
 
     },
         searchText = state.searchText,
