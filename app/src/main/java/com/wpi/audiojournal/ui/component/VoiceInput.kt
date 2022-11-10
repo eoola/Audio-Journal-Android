@@ -60,7 +60,7 @@ fun VoiceInput(viewModel: VoiceInputViewModel= viewModel()) {
         if (viewModel.state.text != null && !viewModel.state.text.equals("null")){
 
 
-            Text(text = viewModel.state.text,
+            Text(text = viewModel.state.text!!,
                 fontSize = 20.sp
             )
             //return viewModel.state.text!!
