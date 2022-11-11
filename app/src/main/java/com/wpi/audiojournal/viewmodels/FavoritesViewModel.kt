@@ -30,4 +30,22 @@ class FavoritesViewModel(private val storage: StoreData): ViewModel(){
     fun createFavoritesButtons(): List<MenuItem>{
         return storage.createButtons()
     }
+
+    fun addLastPlayed(title: String, programLink: String, play: Long){
+        viewModelScope.launch(Dispatchers.IO){
+            storage.addLastPlayed(title, programLink, play)
+        }
+    }
+
+    fun getPlayTime(): Long? {
+        return storage.getPlayTime()
+    }
+
+    fun getTitle(): String? {
+        return storage.getTitle()
+    }
+
+    fun getProgramLink(): String? {
+        return storage.getProgramLink()
+    }
 }

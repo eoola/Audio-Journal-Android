@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.wpi.audiojournal.models.MenuItem
@@ -12,7 +13,10 @@ import kotlinx.coroutines.runBlocking
 
 class StoreData(private val context: Context) {
     companion object {
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("AJODataStore")
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("DataStoreAJO")
+        val title = stringPreferencesKey("title")
+        val playTime = longPreferencesKey("playTime")
+        val programURL = stringPreferencesKey("link")
     }
 
     suspend fun addFavorite(name: String, link: String){
@@ -36,8 +40,29 @@ class StoreData(private val context: Context) {
          val exampleData = runBlocking { context.dataStore.data.first() }
 
          exampleData.asMap().mapKeys {
-             buttons.add(MenuItem(it.key.name, it.value.toString()))
+             if(it.key.name != "title" && it.key.name != "playTime" && it.key.name != "link")
+                buttons.add(MenuItem(it.key.name, it.value.toString()))
          }
         return buttons
+    }
+
+    suspend fun addLastPlayed(header: String, programLink: String, play: Long){
+        context.dataStore.edit { preferences ->
+            preferences[title] = header
+            preferences[playTime] = play
+            preferences[programURL] = programLink
+        }
+    }
+
+     fun getPlayTime(): Long? {
+        return runBlocking {context.dataStore.data.first()[playTime]}
+    }
+
+    fun getTitle(): String? {
+        return runBlocking {context.dataStore.data.first()[title]}
+    }
+
+    fun getProgramLink(): String? {
+        return runBlocking {context.dataStore.data.first()[programURL]}
     }
 }

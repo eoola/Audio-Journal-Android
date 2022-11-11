@@ -21,6 +21,8 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
+import com.wpi.audiojournal.StoreData
+import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
@@ -56,6 +58,8 @@ fun Controls(player: Player) {
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var playbackSpeed by remember { mutableStateOf(player.playbackParameters.speed) }
 
+    val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
+
     fun seek (long: Long) {
         val window = Timeline.Window()
         player.currentTimeline.getWindow(0, window)
@@ -85,6 +89,7 @@ fun Controls(player: Player) {
 
 
     LaunchedEffect(Unit) {
+        player.seekTo(playTime)
         while(true) {
             position = player.currentPosition
             maxPosition = max(player.bufferedPosition, player.duration)
@@ -104,6 +109,7 @@ fun Controls(player: Player) {
         }
         player.addListener(listener)
         onDispose {
+            viewModel.addLastPlayed(title, uri, player.currentPosition)
             player.removeListener(listener)
         }
     }
@@ -137,8 +143,10 @@ fun Controls(player: Player) {
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
                     Icon(Icons.Default.Pause, "Pause")
-                else
+                else{
                     Icon(Icons.Default.PlayArrow, "Play")
+                    viewModel.addLastPlayed(title, uri, player.currentPosition)
+                }
             }
             IconButton(onClick = { seek(position.plus(30000)) }) {
                 Column() {

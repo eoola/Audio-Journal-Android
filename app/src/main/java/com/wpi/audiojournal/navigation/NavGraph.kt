@@ -25,7 +25,7 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
                 menuItems = listOf(
                     MenuItem("Listen Live", "listen-live"),
                     MenuItem("Archived Programs", "archived-programs"),
-                    MenuItem("Resume Last Broadcast", ""),
+                    MenuItem("Resume Last Broadcast", "resume-last-broadcast"),
                     MenuItem("Favorite Programs", "favorite-programs"),
                     MenuItem("Program Schedule", "program-schedule"),
                     MenuItem("Help", "help")
@@ -88,7 +88,18 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
         composable("media-player/{menuTitle}/{uriLink}"){navBackStackEntry ->
             val title = navBackStackEntry.arguments?.getDecodedString("menuTitle") ?: ""
             val uriLink = navBackStackEntry.arguments?.getDecodedString("uriLink") ?: ""
-            MediaPlayerView(title = title, uriString = uriLink)
+            MediaPlayerView(title = title, uriString = uriLink, playTime = 0L)
+        }
+
+        composable("resume-last-broadcast"){
+            val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
+            val title = viewModel.getTitle()
+            val playTime = viewModel.getPlayTime()
+            val link = viewModel.getProgramLink()
+
+            if (title != null && link != null && playTime != null) {
+                    MediaPlayerView(title = title, uriString = link, playTime = playTime)
+            }
         }
 
         composable("favorite-programs"){

@@ -15,7 +15,7 @@ import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.PageSkeleton
 
 @Composable
-fun MediaPlayerView(title: String, uriString: String) {
+fun MediaPlayerView(title: String, uriString: String, playTime: Long) {
     PageSkeleton(header = title) {
         Image(
             painter = painterResource(id = R.drawable.loading_screen_mic),
@@ -26,7 +26,7 @@ fun MediaPlayerView(title: String, uriString: String) {
                 .fillMaxWidth(0.5F)
         )
         Player (Uri.parse(uriString.replace("http:", "https:"))) {
-            Controls(it)
+            Controls(it, title, playTime, uriString)
         }
     }
 }
