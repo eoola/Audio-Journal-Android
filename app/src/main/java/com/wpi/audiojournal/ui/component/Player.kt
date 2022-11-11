@@ -1,17 +1,18 @@
 package com.wpi.audiojournal.ui.component
 
 import android.net.Uri
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronLeft
-import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +21,10 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
+import com.wpi.audiojournal.StoreData
+import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 import kotlinx.coroutines.delay
+import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 
@@ -49,9 +53,12 @@ fun Player(uri: Uri, content: @Composable (Player) -> Unit) {
 
 @Composable
 fun Controls(player: Player) {
-    var position by remember { mutableStateOf(0L) }
-    var maxPosition by remember { mutableStateOf(0L) }
-    var isPlaying by remember { mutableStateOf(false) }
+    var position by remember { mutableStateOf(player.currentPosition) }
+    var maxPosition by remember { mutableStateOf(max(player.bufferedPosition, player.duration)) }
+    var isPlaying by remember { mutableStateOf(player.isPlaying) }
+    var playbackSpeed by remember { mutableStateOf(player.playbackParameters.speed) }
+
+    val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
 
     fun seek (long: Long) {
         val window = Timeline.Window()
@@ -82,6 +89,7 @@ fun Controls(player: Player) {
 
 
     LaunchedEffect(Unit) {
+        player.seekTo(playTime)
         while(true) {
             position = player.currentPosition
             maxPosition = max(player.bufferedPosition, player.duration)
@@ -96,10 +104,12 @@ fun Controls(player: Player) {
                 position = player.currentPosition
                 isPlaying = player.isPlaying
                 maxPosition = max(player.bufferedPosition, player.duration)
+                playbackSpeed = player.playbackParameters.speed
             }
         }
         player.addListener(listener)
         onDispose {
+            viewModel.addLastPlayed(title, uri, player.currentPosition)
             player.removeListener(listener)
         }
     }
@@ -133,8 +143,10 @@ fun Controls(player: Player) {
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
                     Icon(Icons.Default.Pause, "Pause")
-                else
+                else{
                     Icon(Icons.Default.PlayArrow, "Play")
+                    viewModel.addLastPlayed(title, uri, player.currentPosition)
+                }
             }
             IconButton(onClick = { seek(position.plus(30000)) }) {
                 Column() {
@@ -151,7 +163,17 @@ fun Controls(player: Player) {
                 }
             }
         }
-
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            IconButton(onClick = { player.setPlaybackSpeed(playbackSpeed.plus(0.25F).takeIf { it <= 2F} ?: 0.75F) }) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed")
+                    Text(
+                        text = "${DecimalFormat("#.##").format(playbackSpeed)}x",
+                        fontSize = skipTextSize, textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
     }
 }
 

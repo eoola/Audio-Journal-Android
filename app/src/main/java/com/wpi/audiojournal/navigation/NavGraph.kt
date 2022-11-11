@@ -1,13 +1,16 @@
 package com.wpi.audiojournal.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.wpi.audiojournal.StoreData
 import com.wpi.audiojournal.models.MenuItem
 import com.wpi.audiojournal.screen.SplashScreen
 import com.wpi.audiojournal.ui.theme.ColorScheme
 import com.wpi.audiojournal.view.*
+import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 
 @Composable
 fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme) -> Unit) {
@@ -22,8 +25,8 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
                 menuItems = listOf(
                     MenuItem("Listen Live", "listen-live"),
                     MenuItem("Archived Programs", "archived-programs"),
-                    MenuItem("Resume Last Broadcast", ""),
-                    MenuItem("Favorite Programs", ""),
+                    MenuItem("Resume Last Broadcast", "resume-last-broadcast"),
+                    MenuItem("Favorite Programs", "favorite-programs"),
                     MenuItem("Program Schedule", "program-schedule"),
                     MenuItem("Help", "help")
                 ),
@@ -69,10 +72,12 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
         composable("program-detail/{menuTitle}/{name}") { navBackStackEntry ->
             val title = navBackStackEntry.arguments?.getDecodedString("menuTitle") ?: ""
             val name = navBackStackEntry.arguments?.getDecodedString("name") ?: ""
+            val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
             ProgramDetailView(
                 navController = navController,
                 title = title,
-                name = name
+                name = name,
+                viewModel
             )
         }
 
@@ -83,9 +88,24 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
         composable("media-player/{menuTitle}/{uriLink}"){navBackStackEntry ->
             val title = navBackStackEntry.arguments?.getDecodedString("menuTitle") ?: ""
             val uriLink = navBackStackEntry.arguments?.getDecodedString("uriLink") ?: ""
-            MediaPlayerView(title = title, uriString = uriLink)
+            MediaPlayerView(title = title, uriString = uriLink, playTime = 0L)
         }
 
+        composable("resume-last-broadcast"){
+            val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
+            val title = viewModel.getTitle()
+            val playTime = viewModel.getPlayTime()
+            val link = viewModel.getProgramLink()
+
+            if (title != null && link != null && playTime != null) {
+                    MediaPlayerView(title = title, uriString = link, playTime = playTime)
+            }
+        }
+
+        composable("favorite-programs"){
+            val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
+            FavoritesView(menuItems = viewModel.createFavoritesButtons(), navController = navController)
+        }
 
         composable("help") {
             HelpMenuView(
