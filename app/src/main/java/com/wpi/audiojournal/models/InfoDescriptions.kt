@@ -60,7 +60,7 @@ val SearchByVoiceInfo = InfoDescription(
     "Finding Programs with Search By Voice",
     "search-by-voice",
     R.drawable.mic_icon,
-    "TBC"
+    "To Be Implemented"
 
 
 )

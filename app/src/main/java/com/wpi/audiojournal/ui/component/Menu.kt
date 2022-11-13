@@ -24,7 +24,7 @@ import com.wpi.audiojournal.viewmodels.VoiceInputViewModel
 fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: VoiceInputViewModel = viewModel()) where T : Navigable, T : Titled {
 
     //Row(horizontalArrangement = Arrangement.Start){
-    VoiceInput(viewModel)
+    //VoiceInput(viewModel)
     //}
 
 
@@ -50,11 +50,11 @@ fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: Voice
                     color = LocalColorScheme.current.content,
                     style = MaterialTheme.typography.subtitle1
                 )
-                if(viewModel.state!!.text.equals(menuItem.title , ignoreCase = true)){
-                    navController.navigate(menuItem.uri)
-                }else if(viewModel.state!!.text.equals("Back", ignoreCase = true) || viewModel.state!!.text.equals("Go back", ignoreCase = true) || viewModel.state!!.text.equals("Return", ignoreCase = true)){
-                    navController.popBackStack()
-                }
+                //if(viewModel.state!!.text.equals(menuItem.title , ignoreCase = true)){
+                //    navController.navigate(menuItem.uri)
+                //}else if(viewModel.state!!.text.equals("Back", ignoreCase = true) || viewModel.state!!.text.equals("Go back", ignoreCase = true) || viewModel.state!!.text.equals("Return", ignoreCase = true)){
+                //    navController.popBackStack()
+                //}
             }
 
         }
