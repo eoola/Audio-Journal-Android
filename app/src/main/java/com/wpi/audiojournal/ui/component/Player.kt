@@ -52,7 +52,7 @@ fun Player(uri: Uri, content: @Composable (Player) -> Unit) {
 
 
 @Composable
-fun Controls(player: Player) {
+fun Controls(player: Player, title:String, playTime: Long, uri: String) {
     var position by remember { mutableStateOf(player.currentPosition) }
     var maxPosition by remember { mutableStateOf(max(player.bufferedPosition, player.duration)) }
     var isPlaying by remember { mutableStateOf(player.isPlaying) }

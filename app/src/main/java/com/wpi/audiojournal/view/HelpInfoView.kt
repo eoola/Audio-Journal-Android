@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.wpi.audiojournal.models.helpInfoMap
 import com.wpi.audiojournal.ui.component.PageSkeleton
+import com.wpi.audiojournal.ui.theme.LocalColorScheme
 
 @Composable
 fun HelpInfoView(uriString: String) {
@@ -31,7 +32,8 @@ fun HelpInfoView(uriString: String) {
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
                 text = info.desc,
-                style = MaterialTheme.typography.subtitle1
+                style = MaterialTheme.typography.subtitle1,
+                color = LocalColorScheme.current.pageContent,
             )
             info.icon2?.let {
                 Image(

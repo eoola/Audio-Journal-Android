@@ -19,7 +19,7 @@ private fun LightColorPalette(colorScheme: ColorScheme) = lightColors(
     secondary = colorScheme.getRainbowColor(2)
 )
 
-data class ColorScheme(val colors: List<Color>, val background: Color, val content: Color, val borders: Color) {
+data class ColorScheme(val colors: List<Color>, val background: Color, val content: Color, val borders: Color, val pageContent: Color) {
     fun getRainbowColor(index: Int) = colors[index % colors.size]
 }
 
@@ -28,17 +28,41 @@ val colorSchemes = listOf(
         listOf(Purple, Salmon, Orange, Teal, Yellow, Blue),
         Gray,
         Color.Black,
+        Color.Black,
         Color.Black
     ),
     ColorScheme(
         listOf(Color.White),
         Blue,
         Color.Black,
+        Color.Black,
         Color.Black
     ),
     ColorScheme(
         listOf(Color.White),
         Teal,
+        Color.Black,
+        Color.Black,
+        Color.Black
+    ),
+    ColorScheme(
+        listOf(Color.White),
+        Yellow,
+        Color.Black,
+        Color.Black,
+        Color.Black
+    ),
+    ColorScheme(
+        listOf(Color.White),
+        Brown,
+        Color.Black,
+        Color.Black,
+        Color.White
+    ),
+    ColorScheme(
+        listOf(Color.Black),
+        Color.White,
+        Color.White,
         Color.Black,
         Color.Black
     )

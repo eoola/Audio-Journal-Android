@@ -27,6 +27,7 @@ fun PageSkeleton (
             Text(
                 modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
                 text = header,
+                color = LocalColorScheme.current.pageContent,
                 style = MaterialTheme.typography.h5.copy(
                     fontWeight = FontWeight.ExtraBold,
                 ),
