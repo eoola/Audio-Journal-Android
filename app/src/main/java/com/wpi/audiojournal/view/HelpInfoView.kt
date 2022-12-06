@@ -22,7 +22,7 @@ fun HelpInfoView(uriString: String) {
         info?.let { info ->
             Image(
                 painter = painterResource(id = info.icon),
-                contentDescription = info.screenTitle + " icon",
+                contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .size(width = 200.dp, height = 100.dp)
@@ -38,7 +38,7 @@ fun HelpInfoView(uriString: String) {
             info.icon2?.let {
                 Image(
                     painter = painterResource(id = it),
-                    contentDescription = "audio journal main logo",
+                    contentDescription = null,
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier.size(width = 200.dp, height = 100.dp)
                         .align(Alignment.CenterHorizontally)

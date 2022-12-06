@@ -6,9 +6,11 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -38,15 +40,16 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FavoritesSection(navController: NavController, title: String, favViewModel: FavoritesViewModel){
 
     val gray = R.drawable.favorites_gray
     val yellow = R.drawable.favorites_yellow
 
-    Row(modifier = Modifier.padding(20.dp)){
+    Row(modifier = Modifier.padding(20.dp).semantics(mergeDescendants = true){}){
         Text(
-            modifier = Modifier.padding(top=15.dp),
+            modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
             text = "Favorite: ",
 //                color = colorResource(id = AppColorSchemes().getContent()),
         )
@@ -55,7 +58,11 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
             mutableStateOf(favViewModel.isFavorite(title))
         }
 
-        IconButton(onClick = {
+        IconButton(modifier = Modifier.clearAndSetSemantics {
+            contentDescription = if(marked) "This program is currently favorited. Double tap this button to unfavorite this program" else "This program is currently" +
+                    "not favorited. Double tap this button to favorite this program"
+        },
+            onClick = {
             marked = !marked
 
             if(marked){

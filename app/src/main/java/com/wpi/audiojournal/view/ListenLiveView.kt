@@ -28,7 +28,7 @@ fun ListenLiveView(title: String, viewModel: LivestreamViewModel = viewModel()) 
         Loading(data = viewModel.uri) { uri ->
             Image(
                 painter = painterResource(id = R.drawable.loading_screen_mic),
-                contentDescription = "Album Art",
+                contentDescription = null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .padding(50.dp)
