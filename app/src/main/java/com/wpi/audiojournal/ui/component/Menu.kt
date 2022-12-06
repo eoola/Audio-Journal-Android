@@ -11,7 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.navigation.Navigable
@@ -48,7 +50,9 @@ fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: Voice
                 Text(
                     text = menuItem.title,
                     color = LocalColorScheme.current.content,
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.subtitle1,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp
                 )
                 //if(viewModel.state!!.text.equals(menuItem.title , ignoreCase = true)){
                 //    navController.navigate(menuItem.uri)

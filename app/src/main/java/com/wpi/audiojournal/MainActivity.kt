@@ -20,6 +20,7 @@ import com.wpi.audiojournal.models.Program
 import com.wpi.audiojournal.navigation.SetupNavGraph
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme
+import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ArchiveViewModel
 import com.wpi.audiojournal.viewmodels.CategoryViewModel
 import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = LocalColorScheme.current.background
                 ) {
                     val navController = rememberNavController()
 

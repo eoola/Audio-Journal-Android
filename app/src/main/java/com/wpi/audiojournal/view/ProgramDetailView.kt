@@ -6,12 +6,14 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
@@ -30,7 +32,7 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.program) { program ->
-            Text(text = program.description, color = LocalColorScheme.current.pageContent)
+            Text(text = program.description, fontSize = 18.sp)
             FavoritesSection(navController, title, favViewModel)
             program.episodes?.let {
                 Menu(menuItems = it, navController = navController)
@@ -52,7 +54,6 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
         Text(
             modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
             text = "Favorite: ",
-                color = LocalColorScheme.current.pageContent,
         )
 
         var marked by rememberSaveable {
