@@ -2,10 +2,7 @@ package com.wpi.audiojournal
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.wpi.audiojournal.models.MenuItem
 import kotlinx.coroutines.flow.first
@@ -17,6 +14,7 @@ class StoreData(private val context: Context) {
         val title = stringPreferencesKey("title")
         val playTime = longPreferencesKey("playTime")
         val programURL = stringPreferencesKey("link")
+        val colorIndex = intPreferencesKey("color")
     }
 
     suspend fun addFavorite(name: String, link: String){
@@ -40,7 +38,7 @@ class StoreData(private val context: Context) {
          val exampleData = runBlocking { context.dataStore.data.first() }
 
          exampleData.asMap().mapKeys {
-             if(it.key.name != "title" && it.key.name != "playTime" && it.key.name != "link")
+             if(it.key.name != "title" && it.key.name != "playTime" && it.key.name != "link" && it.key.name != "color")
                 buttons.add(MenuItem(it.key.name, it.value.toString()))
          }
         return buttons
@@ -54,6 +52,12 @@ class StoreData(private val context: Context) {
         }
     }
 
+    suspend fun addColorScheme(index: Int){
+        context.dataStore.edit { preferences ->
+            preferences[colorIndex] = index
+        }
+    }
+
      fun getPlayTime(): Long? {
         return runBlocking {context.dataStore.data.first()[playTime]}
     }
@@ -64,5 +68,9 @@ class StoreData(private val context: Context) {
 
     fun getProgramLink(): String? {
         return runBlocking {context.dataStore.data.first()[programURL]}
+    }
+
+    fun getColorIndex(): Int? {
+        return runBlocking {context.dataStore.data.first()[colorIndex]}
     }
 }
