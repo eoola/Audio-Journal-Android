@@ -50,7 +50,7 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
     val gray = R.drawable.favorites_gray
     val yellow = R.drawable.favorites_yellow
 
-    Row(modifier = Modifier.padding(20.dp).semantics(mergeDescendants = true){}){
+    Row(modifier = Modifier.padding(20.dp)){
         Text(
             modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
             text = "Favorite: ",

@@ -45,8 +45,7 @@ fun SplashScreen(navController: NavController){
         .background(color = Blue)){
         Column (verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.Black, modifier = Modifier.semantics { this.invisibleToUser() })
-            Modifier.padding(40.dp)
+            Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.Black, modifier = Modifier.semantics { this.invisibleToUser() }.padding(40.dp))
             Image(
                 painter = painterResource(id = R.drawable.loading_screen_mic),
                 contentDescription = null,
@@ -54,7 +53,7 @@ fun SplashScreen(navController: NavController){
                 contentScale = ContentScale.FillHeight
             )
             CircularProgressIndicator(color = Salmon, modifier = Modifier.semantics { this.invisibleToUser() })
-            Text(text = "Made in Cooperation with", textAlign = TextAlign.Center, fontSize = 30.sp, color = Color.Black, modifier = Modifier.semantics { this.invisibleToUser() })
+            Text(text = "Made in Cooperation with", textAlign = TextAlign.Center, fontSize = 30.sp, color = Color.Black, modifier = Modifier.semantics { this.invisibleToUser() }.padding(20.dp))
             Modifier.padding(40.dp)
             Image(
                 painter = painterResource(id = R.drawable.loading_screen_wpi_logo),
