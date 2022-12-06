@@ -6,6 +6,9 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import com.wpi.audiojournal.StoreData
+import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 
 private fun DarkColorPalette(colorScheme: ColorScheme) = darkColors(
     primary = colorScheme.getRainbowColor(0),
@@ -57,7 +60,7 @@ val colorSchemes = listOf(
         Brown,
         Color.Black,
         Color.Black,
-        Color.White
+        Color.Black
     ),
     ColorScheme(
         listOf(Color.Black),
@@ -67,18 +70,19 @@ val colorSchemes = listOf(
         Color.Black
     )
 )
+fun nextColorScheme (from: ColorScheme, viewModel: FavoritesViewModel): ColorScheme {
+    viewModel.addColorScheme(colorSchemes.indexOf(from).inc().mod(colorSchemes.size))
+    return colorSchemes[colorSchemes.indexOf(from).inc().mod(colorSchemes.size)]
+}
 
-fun nextColorScheme (from: ColorScheme) =
-    colorSchemes[colorSchemes.indexOf(from).inc().mod(colorSchemes.size)]
-
-
-val LocalColorScheme = staticCompositionLocalOf { colorSchemes.first() }
+var LocalColorScheme = compositionLocalOf { colorSchemes.first() }
 
 @Composable
 fun AudioJournalTheme(darkTheme: Boolean = isSystemInDarkTheme(),
                       content: @Composable ((ColorScheme) -> Unit) -> Unit) {
+    val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
     val (colorScheme, setColorScheme) = remember {
-        mutableStateOf(colorSchemes.first())
+        mutableStateOf(colorSchemes[viewModel.getColorScheme()!!])
     }
 
     val colors = if (darkTheme) {
@@ -86,6 +90,10 @@ fun AudioJournalTheme(darkTheme: Boolean = isSystemInDarkTheme(),
     } else {
         LightColorPalette(colorScheme)
     }
+
+
+//    LocalColorScheme = compositionLocalOf { colorSchemes[viewModel.getColorScheme()!!]}
+
 
     CompositionLocalProvider (LocalColorScheme provides colorScheme) {
         MaterialTheme(

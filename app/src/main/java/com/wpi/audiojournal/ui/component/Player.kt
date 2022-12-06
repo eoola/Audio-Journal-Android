@@ -116,8 +116,8 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(time(position))
-            Text(time(maxPosition))
+            Text(time(position), fontSize = 18.sp)
+            Text(time(maxPosition), fontSize = 18.sp)
         }
         Slider(
             modifier = Modifier.fillMaxWidth(),

@@ -6,16 +6,21 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
+import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ProgramViewModel
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 
@@ -27,7 +32,7 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.program) { program ->
-            Text(text = program.description)
+            Text(text = program.description, fontSize = 18.sp)
             FavoritesSection(navController, title, favViewModel)
             program.episodes?.let {
                 Menu(menuItems = it, navController = navController)
@@ -38,6 +43,7 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FavoritesSection(navController: NavController, title: String, favViewModel: FavoritesViewModel){
 
@@ -46,16 +52,19 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
 
     Row(modifier = Modifier.padding(20.dp)){
         Text(
-            modifier = Modifier.padding(top=15.dp),
+            modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
             text = "Favorite: ",
-//                color = colorResource(id = AppColorSchemes().getContent()),
         )
 
         var marked by rememberSaveable {
             mutableStateOf(favViewModel.isFavorite(title))
         }
 
-        IconButton(onClick = {
+        IconButton(modifier = Modifier.clearAndSetSemantics {
+            contentDescription = if(marked) "This program is currently favorited. Double tap this button to unfavorite this program" else "This program is currently" +
+                    "not favorited. Double tap this button to favorite this program"
+        },
+            onClick = {
             marked = !marked
 
             if(marked){

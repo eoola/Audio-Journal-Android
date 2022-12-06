@@ -37,6 +37,12 @@ class FavoritesViewModel(private val storage: StoreData): ViewModel(){
         }
     }
 
+    fun addColorScheme(index: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            storage.addColorScheme(index)
+        }
+    }
+
     fun getPlayTime(): Long? {
         return storage.getPlayTime()
     }
@@ -47,5 +53,9 @@ class FavoritesViewModel(private val storage: StoreData): ViewModel(){
 
     fun getProgramLink(): String? {
         return storage.getProgramLink()
+    }
+
+    fun getColorScheme(): Int? {
+        return storage.getColorIndex()
     }
 }
