@@ -60,7 +60,7 @@ val colorSchemes = listOf(
         Brown,
         Color.Black,
         Color.Black,
-        Color.White
+        Color.Black
     ),
     ColorScheme(
         listOf(Color.Black),

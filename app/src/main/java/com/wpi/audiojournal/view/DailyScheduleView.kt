@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.PageSkeleton
+import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ScheduleViewModel
 
 @Composable
@@ -35,6 +36,7 @@ fun DailyScheduleView(title: String, viewModel: ScheduleViewModel = viewModel())
                     items(day.toList()) {
                         Text(
                             text = "${it.first}: ${it.second}",
+                            color = LocalColorScheme.current.pageContent,
                             style = MaterialTheme.typography.subtitle2
                         )
                     }

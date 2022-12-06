@@ -18,6 +18,7 @@ import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
+import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ProgramViewModel
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 
@@ -29,7 +30,7 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.program) { program ->
-            Text(text = program.description)
+            Text(text = program.description, color = LocalColorScheme.current.pageContent)
             FavoritesSection(navController, title, favViewModel)
             program.episodes?.let {
                 Menu(menuItems = it, navController = navController)
@@ -51,7 +52,7 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
         Text(
             modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
             text = "Favorite: ",
-//                color = colorResource(id = AppColorSchemes().getContent()),
+                color = LocalColorScheme.current.pageContent,
         )
 
         var marked by rememberSaveable {
