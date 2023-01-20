@@ -82,7 +82,7 @@ fun AudioJournalTheme(darkTheme: Boolean = isSystemInDarkTheme(),
                       content: @Composable ((ColorScheme) -> Unit) -> Unit) {
     val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
     val (colorScheme, setColorScheme) = remember {
-        mutableStateOf(colorSchemes.first())
+        mutableStateOf(colorSchemes[viewModel.getColorScheme() ?: 0])
     }
 
     val colors = if (darkTheme) {
