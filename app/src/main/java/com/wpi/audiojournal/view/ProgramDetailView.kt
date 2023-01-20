@@ -20,6 +20,7 @@ import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
+import com.wpi.audiojournal.ui.component.airtimeMap
 import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ProgramViewModel
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
@@ -32,6 +33,19 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.program) { program ->
+            val airtime = airtimeMap.get(program.title)
+            var strAirtime = ""
+            if (airtime != null) {
+
+                for(day in airtime.keys){
+                    strAirtime = strAirtime +" "+ day
+                    for ( time in airtime.get(day)!!){
+                        strAirtime = strAirtime +" "+ time
+                    }
+                    strAirtime = strAirtime
+                }
+            }
+            Text(text = "Airtime:"+strAirtime,fontSize = 18.sp)
             Text(text = program.description, fontSize = 18.sp)
             FavoritesSection(navController, title, favViewModel)
             program.episodes?.let {

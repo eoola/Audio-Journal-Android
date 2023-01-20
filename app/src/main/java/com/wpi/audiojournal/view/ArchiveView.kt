@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.wpi.audiojournal.ui.component.GetAirtimeMap
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
@@ -23,6 +24,7 @@ import com.wpi.audiojournal.viewmodels.ArchiveViewModel
 
 @Composable
 fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = viewModel()){
+
     LaunchedEffect(LocalContext.current) {
         viewModel.loadCategories()
     }
