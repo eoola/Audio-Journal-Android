@@ -93,6 +93,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
         while(true) {
             position = player.currentPosition
             maxPosition = max(player.bufferedPosition, player.duration)
+            viewModel.addLastPlayed(title, uri, player.currentPosition)
             delay(500)
         }
     }
@@ -109,7 +110,6 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
         }
         player.addListener(listener)
         onDispose {
-            viewModel.addLastPlayed(title, uri, player.currentPosition)
             player.removeListener(listener)
         }
     }
@@ -145,7 +145,6 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
                     Icon(Icons.Default.Pause, "Pause")
                 else{
                     Icon(Icons.Default.PlayArrow, "Play")
-                    viewModel.addLastPlayed(title, uri, player.currentPosition)
                 }
             }
             IconButton(onClick = { seek(position.plus(30000)) }) {

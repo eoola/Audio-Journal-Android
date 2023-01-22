@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.navigation
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -99,6 +100,10 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
 
             if (title != null && link != null && playTime != null) {
                     MediaPlayerView(title = title, uriString = link, playTime = playTime)
+            }
+            else{
+                Toast.makeText(LocalContext.current, "No previous program played", Toast.LENGTH_LONG).show()
+                MediaPlayerView(title = "Audio Journal", uriString = "", playTime = 0)
             }
         }
 
