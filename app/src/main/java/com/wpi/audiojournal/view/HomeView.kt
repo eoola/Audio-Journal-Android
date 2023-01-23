@@ -1,5 +1,6 @@
 package com.wpi.audiojournal.view
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ fun HomeView(
     navController: NavController,
     setColorScheme: (ColorScheme) -> Unit
 ) {
+    BackHandler {}
     val colors = LocalColorScheme.current
     val viewModel = FavoritesViewModel(StoreData(LocalContext.current))
     PageSkeleton(header = "Audio Journal") {
