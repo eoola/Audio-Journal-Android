@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,6 +30,16 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
         viewModel.loadCategories()
     }
 
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+    val screenHeight = configuration.screenHeightDp
+
+    val menH = screenHeight-130
+    val menW = screenWidth
+    //val menH = screenHeight/8-10
+    val butH = menH/7
+    val butW = menW-10
+
     PageSkeleton(header = "Program Categories") {
 
             Button(
@@ -37,7 +48,7 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
                         horizontal = 24.dp,
                         vertical = 5.dp
                     ).fillMaxWidth()
-                    .size(width = 100.dp, height = 40.dp),
+                    .size(width = butW.dp, height = (butH/2).dp),
                 colors = ButtonDefaults.buttonColors(Color.White),
                 shape = CircleShape,
                 border = BorderStroke(2.dp, LocalColorScheme.current.borders),
@@ -47,6 +58,7 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
                 }
             ){
                 Text(
+                    modifier = Modifier.size(butW.dp, (butH/2).dp),
                     text = "Search Programs",
                     color = Color.Black,
                     style = MaterialTheme.typography.subtitle1

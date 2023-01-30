@@ -30,17 +30,17 @@ fun DailyScheduleView(title: String, viewModel: ScheduleViewModel = viewModel())
     PageSkeleton(header = title) {
         Loading(data = viewModel.schedule) { schedule ->
             LazyColumn(
-                modifier = Modifier.padding(top = 50.dp, start = 10.dp),
+                modifier = Modifier.padding(top = 5.dp, start = 5.dp),
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.Start,
-                contentPadding = PaddingValues(vertical = 15.dp)
+                contentPadding = PaddingValues(vertical = 5.dp)
             ) {
                 schedule[title]?.let { day ->
                     items(day.toList()) {
                         Text(
                             text = "${it.first}: ${it.second}",
                             style = MaterialTheme.typography.subtitle1,
-                            fontSize = 18.sp
+                            fontSize = 16.sp
                         )
                     }
                 }

@@ -1,10 +1,7 @@
 package com.wpi.audiojournal.ui.component
 
 import android.net.Uri
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Slider
@@ -16,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -163,7 +161,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
             }
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            IconButton(onClick = { player.setPlaybackSpeed(playbackSpeed.plus(0.25F).takeIf { it <= 2F} ?: 0.75F) }) {
+            IconButton(onClick = { player.setPlaybackSpeed(playbackSpeed.plus(0.5F).takeIf { it <= 2F} ?: 0.5F) }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed")
                     Text(
@@ -197,9 +195,9 @@ fun LiveControls(player: Player) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
-                    Icon(Icons.Default.Pause, "Pause")
+                    Icon(Icons.Default.Pause, "Pause", Modifier.size(70.dp))
                 else
-                    Icon(Icons.Default.PlayArrow, "Play")
+                    Icon(Icons.Default.PlayArrow, "Play", Modifier.size(70.dp))
             }
         }
 

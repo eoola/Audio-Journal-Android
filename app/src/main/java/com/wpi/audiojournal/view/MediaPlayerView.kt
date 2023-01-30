@@ -18,7 +18,7 @@ import com.wpi.audiojournal.ui.component.PageSkeleton
 fun MediaPlayerView(title: String, uriString: String, playTime: Long) {
     PageSkeleton(header = title) {
         Image(
-            painter = painterResource(id = R.drawable.loading_screen_mic),
+            painter = painterResource(id = R.drawable.ic_mic_ajo),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier

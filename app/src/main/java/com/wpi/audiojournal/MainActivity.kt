@@ -9,6 +9,8 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.wpi.audiojournal.models.Program
+import com.google.android.exoplayer2.C
+import com.wpi.audiojournal.models.Category
 import com.wpi.audiojournal.navigation.SetupNavGraph
 import com.wpi.audiojournal.ui.component.GetAirtimeMap
 import com.wpi.audiojournal.ui.theme.AudioJournalTheme

@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+//import com.wpi.audiojournal.R
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.LiveControls
 import com.wpi.audiojournal.ui.component.Loading
@@ -27,7 +28,7 @@ fun ListenLiveView(title: String, viewModel: LivestreamViewModel = viewModel()) 
     PageSkeleton(header = title) {
         Loading(data = viewModel.uri) { uri ->
             Image(
-                painter = painterResource(id = R.drawable.loading_screen_mic),
+                painter = painterResource(id = R.drawable.ic_mic_ajo),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
