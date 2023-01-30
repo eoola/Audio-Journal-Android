@@ -14,12 +14,12 @@ import com.wpi.audiojournal.view.*
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 
 @Composable
-fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme) -> Unit) {
+fun SetupNavGraph(navController: NavHostController, initialRoute: suspend () -> String, setColorScheme: (ColorScheme) -> Unit) {
     NavHost(navController = navController, startDestination = "loading") {
 
 
         composable("loading") {
-            SplashScreen(navController = navController)
+            SplashScreen(navController = navController, initialRoute)
         }
         composable("home") {
             HomeView(
@@ -131,8 +131,10 @@ fun SetupNavGraph(navController: NavHostController, setColorScheme: (ColorScheme
             HelpInfoView(uriString = screenID)
             
         }
-        composable("search_button"){
-            SearchProgramsView(navController = navController, title = "Search Programs")
+        composable("search_button?q={q}"){
+            SearchProgramsView(navController = navController, title = "Search Programs",
+                it.arguments?.getString("q")
+            )
             //ProgramLoad1(navController = navController, title = "Search Programs")
         }
     }

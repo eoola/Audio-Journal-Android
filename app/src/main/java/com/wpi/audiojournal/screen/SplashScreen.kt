@@ -27,17 +27,11 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SplashScreen(navController: NavController){
-
-    /*if(factory.doneLoad == false){
-        Log.d("TEST","FALSE!!")
-        factory.initializeFactory()
-    }*/
+fun SplashScreen(navController: NavController, initialRoute: suspend () -> String){
 
     LaunchedEffect(key1 = true){
-        //delay(3000)
-        delay(3000)
-        navController.navigate("home"){
+        delay(1000)
+        navController.navigate(initialRoute()){
             popUpTo("loading") {
                 inclusive = true
             }
