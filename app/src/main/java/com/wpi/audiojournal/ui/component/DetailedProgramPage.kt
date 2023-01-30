@@ -17,24 +17,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.wpi.audiojournal.models.Program
 import com.wpi.audiojournal.navigation.Navigable
 import com.wpi.audiojournal.navigation.Titled
 import com.wpi.audiojournal.ui.theme.LocalColorScheme
+import com.wpi.audiojournal.view.FavoritesSection
+import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 import com.wpi.audiojournal.viewmodels.VoiceInputViewModel
 
 
 @Composable
-fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: VoiceInputViewModel = viewModel()) where T : Navigable, T : Titled {
+fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: VoiceInputViewModel = viewModel(), textSize:Int, title:String, favViewModel: FavoritesViewModel, strAirtime:String,program: Program) where T : Navigable, T : Titled {
 
     //Row(horizontalArrangement = Arrangement.Start){
     //VoiceInput(viewModel)
     //}
 
     val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp
-    val screenHeight = configuration.screenHeightDp
 
-    //val menH = screenHeight/8-10
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp
+
     val menH = screenHeight-130
     val menW = screenWidth
     //val menH = screenHeight/8-10
@@ -44,30 +47,36 @@ fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: Voice
 
 
 
-
     LazyColumn {
+        item{
+            Text(text = "Airtime:"+strAirtime,fontSize = textSize.sp)
+
+
+            //}
+            //Row{
+            Text(text = program.description, fontSize = textSize.sp)
+
+            //}
+
+            //Row{
+            FavoritesSection(navController, title, favViewModel)
+
+        }
+
         rainbow(menuItems) { menuItem, color ->
             var buttonTextSize = butH/5
-           // var padding =
 
-            /*if(screenWidth < 500){
-                if(menuItem.title.length > 40 ){
-                    buttonTextSize = 13
-                }else if (menuItem.title.length > 30){
-                    buttonTextSize = 15
-                }
 
-            }*/
 
 
             Button(
                 modifier = Modifier
                     .padding(
-                        horizontal = 10.dp,
+                        horizontal = 24.dp,
                         vertical = 5.dp
                     )
                     .fillMaxSize()
-                    .size(width = butW.dp, height = (butH).dp),
+                    .size(width = butW.dp, height = butH.dp),
                 colors = ButtonDefaults.buttonColors(color),
                 shape = CircleShape,
                 border = BorderStroke(2.dp, LocalColorScheme.current.borders),

@@ -27,8 +27,8 @@ val MediaPlayerInfo = InfoDescription(
     R.drawable.search_icon,
     "The media player is the screen that appears when audio is played. \n\nIt contains a play/pause button, skip buttons, speed button and scroll bar and an airplay button. \n\n" +
             "The skip button allow you to skip forward or backwards by 30 or 60 seconds. \n\n" +
-            "The speed button allows you to change the playback speed to 1.5 times the speed or 2 times the speed. \n\n" +
-            "The airplay button allows you to connect to other devices through Bluetooth."
+            "The speed button allows you to change the playback speed to 0.5 times the speed, 1.5 times the speed, or 2 times the speed. \n\n" +
+            "As a note, the audio can be casted to other devices through enabling Bluetooth in the device settings."
 
 )
 val BrowsingMenuInfo= InfoDescription(

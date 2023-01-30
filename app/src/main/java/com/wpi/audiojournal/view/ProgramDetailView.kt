@@ -1,7 +1,17 @@
 package com.wpi.audiojournal.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Card
+
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -10,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
@@ -17,10 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.R
-import com.wpi.audiojournal.ui.component.Loading
-import com.wpi.audiojournal.ui.component.Menu
-import com.wpi.audiojournal.ui.component.PageSkeleton
-import com.wpi.audiojournal.ui.component.airtimeMap
+import com.wpi.audiojournal.ui.component.*
 import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ProgramViewModel
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
@@ -31,28 +39,92 @@ fun ProgramDetailView(navController: NavController, title: String, name: String,
         viewModel.loadEpisodes(name)
     }
 
-    PageSkeleton(header = title) {
-        Loading(data = viewModel.program) { program ->
-            val airtime = airtimeMap.get(program.title)
-            var strAirtime = ""
-            if (airtime != null) {
 
-                for(day in airtime.keys){
-                    strAirtime = strAirtime +" "+ day
-                    for ( time in airtime.get(day)!!){
-                        strAirtime = strAirtime +" "+ time
+
+    val configuration = LocalConfiguration.current
+
+    val screenWidth = configuration.screenWidthDp
+
+    var textSize = 16
+
+
+
+
+
+    val scrollState = rememberScrollState()
+
+
+    PageSkeleton(header = title) {
+
+
+        Loading(data = viewModel.program) { program ->
+            //Box(modifier = Modifier
+             //   .scrollable(state = scrollState, orientation = Orientation.Vertical)){
+
+                var airtime = airtimeMap.get(program.title)
+                var strAirtime = ""
+
+                if(airtime == null || airtime.equals("")){
+
+                    for (i in airtimeMap.keys){
+                        Log.d("TEST", i)
+                        if (i.contains(program.title)){
+                            airtime = airtimeMap.get(i)
+                        }
                     }
-                    strAirtime = strAirtime
                 }
-            }
-            Text(text = "Airtime:"+strAirtime,fontSize = 18.sp)
-            Text(text = program.description, fontSize = 18.sp)
-            FavoritesSection(navController, title, favViewModel)
-            program.episodes?.let {
-                Menu(menuItems = it, navController = navController)
-            }
+                if (airtime != null) {
+
+                    for(day in airtime.keys){
+                        strAirtime = strAirtime +" "+ day
+                        for ( time in airtime.get(day)!!){
+                            strAirtime = strAirtime +" "+ time
+                        }
+                        strAirtime = strAirtime
+                    }
+                }
+
+                    //Text(text = "Airtime:"+strAirtime,fontSize = textSize.sp)
+
+
+
+                    //Text(text = program.description, fontSize = textSize.sp)
+
+                    //FavoritesSection(navController, title, favViewModel)
+
+                    program.episodes?.let {
+                        DPPage(
+                            menuItems = it,
+                            navController = navController,
+                            textSize = textSize,
+                            title = title,
+                            favViewModel = favViewModel,
+                            strAirtime = strAirtime,
+                            program = program
+                        )
+
+                        //Menu(menuItems = it, navController = navController)
+                    }
+
+
+
+
+
+
+
+                //}
+
+
+
+
+
+            //}
         }
+
     }
+
+
+
 
 
 }
@@ -64,9 +136,11 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
     val gray = R.drawable.favorites_gray
     val yellow = R.drawable.favorites_yellow
 
-    Row(modifier = Modifier.padding(20.dp)){
+    Row(modifier = Modifier.padding(10.dp)){
         Text(
-            modifier = Modifier.padding(top=15.dp).semantics { this.invisibleToUser() },
+            modifier = Modifier
+                .padding(top = 15.dp)
+                .semantics { this.invisibleToUser() },
             text = "Favorite: ",
         )
 
