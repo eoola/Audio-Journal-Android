@@ -61,7 +61,7 @@ val SearchByVoiceInfo = InfoDescription(
     "Finding Programs with Search By Voice",
     "search-by-voice",
     R.drawable.mic_icon,
-    "To Be Implemented"
+    "Audio Journal integrates with your device's built-in Google Assistant to provide voice search functionality. Simply ask Google Assistant to search Audio Journal, and you will be taken to the results."
 
 
 )
