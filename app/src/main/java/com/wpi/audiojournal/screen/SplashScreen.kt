@@ -5,8 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -24,18 +23,19 @@ import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.theme.Blue
 import com.wpi.audiojournal.ui.theme.Salmon
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SplashScreen(navController: NavController, initialRoute: suspend () -> String){
 
     LaunchedEffect(key1 = true){
-        delay(1000)
-        navController.navigate(initialRoute()){
-            popUpTo("loading") {
-                inclusive = true
-            }
-        }
+        val delayJob = launch { delay(1000) }
+        val route = initialRoute()
+        delayJob.join()
+        navController.popBackStack()
+        navController.navigate("home")
+        navController.navigate(route)
     }
 
     Box(modifier = Modifier
