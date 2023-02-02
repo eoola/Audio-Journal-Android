@@ -24,7 +24,18 @@ fun HelpInfoView(uriString: String) {
     val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
 
-    var textSize = 16
+
+
+    val menH = screenHeight-130
+    val menW = screenWidth
+    //val menH = screenHeight/8-10
+    val butH = menH/7
+    val butW = menW-10
+
+
+    var buttonTextSize = butH/5
+
+    var textSize = buttonTextSize
     PageSkeleton(header = info?.screenTitle ?: "") {
         info?.let { info ->
 
@@ -39,9 +50,11 @@ fun HelpInfoView(uriString: String) {
                             .align(Alignment.CenterHorizontally)
                     )
 
+
                     if (info.screenTitle.contains("Audio Journal") && screenWidth < 500){
-                        textSize = 15
+                        textSize = buttonTextSize-3
                     }
+
                     Text(
                         modifier = Modifier.padding(horizontal = 5.dp, vertical = 10.dp),
                         text = info.desc,

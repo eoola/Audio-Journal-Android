@@ -136,12 +136,27 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
     val gray = R.drawable.favorites_gray
     val yellow = R.drawable.favorites_yellow
 
+    val configuration = LocalConfiguration.current
+
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp
+
+    val menH = screenHeight-130
+    val menW = screenWidth
+    //val menH = screenHeight/8-10
+    val butH = menH/7
+    val butW = menW-10
+
+
+    var buttonTextSize = butH/5
+
     Row(modifier = Modifier.padding(10.dp)){
         Text(
             modifier = Modifier
-                .padding(top = 15.dp)
+                .padding(top = buttonTextSize.dp)
                 .semantics { this.invisibleToUser() },
             text = "Favorite: ",
+            fontSize = buttonTextSize.sp
         )
 
         var marked by rememberSaveable {
