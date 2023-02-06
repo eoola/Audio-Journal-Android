@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wpi.audiojournal.StoreData
 import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.screen.SplashScreen
+import com.wpi.audiojournal.view.SplashScreenView
 import com.wpi.audiojournal.ui.theme.ColorScheme
 import com.wpi.audiojournal.view.*
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
@@ -18,7 +18,7 @@ fun SetupNavGraph(navController: NavHostController, initialRoute: suspend () -> 
     NavHost(navController = navController, startDestination = "loading") {
 
         composable("loading") {
-            SplashScreen(navController = navController, initialRoute)
+            SplashScreenView(navController = navController, initialRoute)
         }
 
         composable("home") {
