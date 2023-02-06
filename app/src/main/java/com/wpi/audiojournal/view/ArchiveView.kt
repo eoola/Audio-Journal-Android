@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.wpi.audiojournal.ui.component.GetAirtimeMap
@@ -40,6 +41,8 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
     val butH = menH/7
     val butW = menW-10
 
+    var buttonTextSize = butH/5
+
     PageSkeleton(header = "Program Categories") {
 
             Button(
@@ -58,7 +61,7 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
                 }
             ){
                 Text(
-                    modifier = Modifier.size(butW.dp, (butH/2).dp),
+                    fontSize = buttonTextSize.sp,
                     text = "Search Programs",
                     color = Color.Black,
                     style = MaterialTheme.typography.subtitle1

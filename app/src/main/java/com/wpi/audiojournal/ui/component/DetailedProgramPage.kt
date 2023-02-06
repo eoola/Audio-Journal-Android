@@ -45,16 +45,19 @@ fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: Voi
     val butW = menW-10
 
 
+    var buttonTextSize = butH/5
 
 
-    LazyColumn {
+
+
+    LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
         item{
-            Text(text = "Airtime:"+strAirtime,fontSize = textSize.sp)
+            Text(text = "Airtime:"+strAirtime,fontSize = buttonTextSize.sp)
 
 
             //}
             //Row{
-            Text(text = program.description, fontSize = textSize.sp)
+            Text(text = program.description, fontSize = buttonTextSize.sp)
 
             //}
 
@@ -64,7 +67,7 @@ fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: Voi
         }
 
         rainbow(menuItems) { menuItem, color ->
-            var buttonTextSize = butH/5
+
 
 
 

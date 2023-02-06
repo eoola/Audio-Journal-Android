@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
 import com.wpi.audiojournal.StoreData
+import com.wpi.audiojournal.models.helpInfoMap
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
@@ -51,6 +53,18 @@ fun Player(uri: Uri, content: @Composable (Player) -> Unit) {
 
 @Composable
 fun Controls(player: Player, title:String, playTime: Long, uri: String) {
+
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp
+
+
+
+
+    val controlW = screenWidth/7
+
+
+
     var position by remember { mutableStateOf(player.currentPosition) }
     var maxPosition by remember { mutableStateOf(max(player.bufferedPosition, player.duration)) }
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
@@ -122,32 +136,32 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
             value = (position.toFloat()/maxPosition.toFloat()).takeUnless { it.isNaN() } ?: 0F,
             onValueChange = ::seek
         )
-        val skipTextSize = 10.sp
+        val skipTextSize = 15.sp
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            IconButton(onClick = { seek(position.minus(60000)) }) {
+            IconButton( onClick = { seek(position.minus(60000)) }) {
                 Column() {
-                    Icon(Icons.Default.ChevronLeft, "Rewind Sixty Seconds")
+                    Icon(Icons.Default.ChevronLeft, "Rewind Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
             }
             IconButton(onClick = { seek(position.minus(30000)) }) {
                 Column() {
-                    Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds")
-                    Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
+                    Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
+                    Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center,)
                 }
 
             }
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
-                    Icon(Icons.Default.Pause, "Pause")
+                    Icon(Icons.Default.Pause, "Pause", modifier = Modifier.size(controlW.dp,controlW.dp),)
                 else{
-                    Icon(Icons.Default.PlayArrow, "Play")
+                    Icon(Icons.Default.PlayArrow, "Play", modifier = Modifier.size(controlW.dp,controlW.dp),)
                 }
             }
-            IconButton(onClick = { seek(position.plus(30000)) }) {
+            IconButton( onClick = { seek(position.plus(30000)) }) {
                 Column() {
-                    Icon(Icons.Default.ChevronRight, "Skip Ten Seconds")
+                    Icon(Icons.Default.ChevronRight, "Skip Ten Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
                     Text(text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
 
@@ -155,7 +169,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
             IconButton(onClick = { seek(position.plus(60000)) }) {
                 Column() {
-                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds")
+                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
                     Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
             }
@@ -163,7 +177,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             IconButton(onClick = { player.setPlaybackSpeed(playbackSpeed.plus(0.5F).takeIf { it <= 2F} ?: 0.5F) }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed")
+                    Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed", modifier = Modifier.size(controlW.dp,controlW.dp),)
                     Text(
                         text = "${DecimalFormat("#.##").format(playbackSpeed)}x",
                         fontSize = skipTextSize, textAlign = TextAlign.Center
@@ -176,6 +190,14 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
 @Composable
 fun LiveControls(player: Player) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp
+
+
+
+
+    val controlW = screenWidth/7
     var isPlaying by remember { mutableStateOf(false) }
 
     DisposableEffect(player) {
@@ -193,11 +215,11 @@ fun LiveControls(player: Player) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
+            IconButton( onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
-                    Icon(Icons.Default.Pause, "Pause", Modifier.size(70.dp))
+                    Icon(Icons.Default.Pause, "Pause", modifier = Modifier.size(controlW.dp,controlW.dp),)
                 else
-                    Icon(Icons.Default.PlayArrow, "Play", Modifier.size(70.dp))
+                    Icon(Icons.Default.PlayArrow, "Play", modifier = Modifier.size(controlW.dp,controlW.dp),)
             }
         }
 

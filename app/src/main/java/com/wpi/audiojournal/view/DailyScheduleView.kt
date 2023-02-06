@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +27,19 @@ fun DailyScheduleView(title: String, viewModel: ScheduleViewModel = viewModel())
     LaunchedEffect(LocalContext.current) {
         viewModel.loadSchedule()
     }
+    val configuration = LocalConfiguration.current
+
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp
+
+    val menH = screenHeight-130
+    val menW = screenWidth
+    //val menH = screenHeight/8-10
+    val butH = menH/7
+    val butW = menW-10
+
+
+    var buttonTextSize = butH/5
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.schedule) { schedule ->
@@ -40,7 +54,7 @@ fun DailyScheduleView(title: String, viewModel: ScheduleViewModel = viewModel())
                         Text(
                             text = "${it.first}: ${it.second}",
                             style = MaterialTheme.typography.subtitle1,
-                            fontSize = 16.sp
+                            fontSize = buttonTextSize.sp
                         )
                     }
                 }
