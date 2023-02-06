@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.wpi.audiojournal.ui.component.GetAirtimeMap
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
@@ -37,10 +36,8 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
 
     val menH = screenHeight-130
     val menW = screenWidth
-    //val menH = screenHeight/8-10
     val butH = menH/7
     val butW = menW-10
-
     var buttonTextSize = butH/5
 
     PageSkeleton(header = "Program Categories") {
@@ -57,7 +54,6 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
                 border = BorderStroke(2.dp, LocalColorScheme.current.borders),
                 onClick = {
                     navController.navigate("search_button")
-
                 }
             ){
                 Text(
@@ -66,7 +62,6 @@ fun ArchiveView(navController: NavController, viewModel: ArchiveViewModel = view
                     color = Color.Black,
                     style = MaterialTheme.typography.subtitle1
                 )
-
             }
 
         Loading(data = viewModel.categories) {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SearchProgramsViewModel(): ViewModel() {
+class SearchProgramsViewModel: ViewModel() {
     var text by mutableStateOf("")
     var programs by mutableStateOf(listOf<Program>())
 

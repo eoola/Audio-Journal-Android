@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.wpi.audiojournal.ui.component.GetAirtimeMap
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.Menu
 import com.wpi.audiojournal.ui.component.PageSkeleton
@@ -15,12 +14,10 @@ fun ProgramOptionsView(navController: NavController, title: String, name: String
 
     LaunchedEffect(name) {
         viewModel.loadPrograms(name)
-
     }
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.programs) {
-
             Menu(menuItems = it, navController = navController)
         }
     }

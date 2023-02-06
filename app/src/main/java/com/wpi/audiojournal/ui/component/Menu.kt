@@ -9,7 +9,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
@@ -26,40 +25,17 @@ import com.wpi.audiojournal.viewmodels.VoiceInputViewModel
 @Composable
 fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: VoiceInputViewModel = viewModel()) where T : Navigable, T : Titled {
 
-    //Row(horizontalArrangement = Arrangement.Start){
-    //VoiceInput(viewModel)
-    //}
-
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
     val screenHeight = configuration.screenHeightDp
-
-    //val menH = screenHeight/8-10
     val menH = screenHeight-130
     val menW = screenWidth
-    //val menH = screenHeight/8-10
     val butH = menH/7
     val butW = menW-10
-
-
-
-
+    var buttonTextSize = butH/5
 
     LazyColumn {
         rainbow(menuItems) { menuItem, color ->
-            var buttonTextSize = butH/5
-           // var padding =
-
-            /*if(screenWidth < 500){
-                if(menuItem.title.length > 40 ){
-                    buttonTextSize = 13
-                }else if (menuItem.title.length > 30){
-                    buttonTextSize = 15
-                }
-
-            }*/
-
-
             Button(
                 modifier = Modifier
                     .padding(
@@ -76,7 +52,6 @@ fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: Voice
                 }
             ) {
 
-
                 Text(
                     text = menuItem.title,
                     color = LocalColorScheme.current.content,
@@ -84,18 +59,7 @@ fun <T> Menu (menuItems: List<T>, navController: NavController, viewModel: Voice
                     textAlign = TextAlign.Center,
                     fontSize = buttonTextSize.sp
                 )
-
-                //if(viewModel.state!!.text.equals(menuItem.title , ignoreCase = true)){
-                //    navController.navigate(menuItem.uri)
-                //}else if(viewModel.state!!.text.equals("Back", ignoreCase = true) || viewModel.state!!.text.equals("Go back", ignoreCase = true) || viewModel.state!!.text.equals("Return", ignoreCase = true)){
-                //    navController.popBackStack()
-                //}
             }
-
         }
-
     }
-
-
-
 }

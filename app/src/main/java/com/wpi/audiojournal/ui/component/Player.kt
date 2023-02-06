@@ -21,7 +21,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
 import com.wpi.audiojournal.StoreData
-import com.wpi.audiojournal.models.helpInfoMap
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
@@ -34,7 +33,6 @@ fun Player(uri: Uri, content: @Composable (Player) -> Unit) {
     val exoPlayer = remember (context, uri) {
         ExoPlayer.Builder(context).build().apply {
             setMediaItem(MediaItem.fromUri(uri))
-
             prepare()
             seekToDefaultPosition()
             playWhenReady = true
@@ -55,15 +53,8 @@ fun Player(uri: Uri, content: @Composable (Player) -> Unit) {
 fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
     val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
-
-
-
     val controlW = screenWidth/7
-
-
 
     var position by remember { mutableStateOf(player.currentPosition) }
     var maxPosition by remember { mutableStateOf(max(player.bufferedPosition, player.duration)) }
@@ -140,13 +131,13 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             IconButton( onClick = { seek(position.minus(60000)) }) {
-                Column() {
+                Column {
                     Icon(Icons.Default.ChevronLeft, "Rewind Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
             }
             IconButton(onClick = { seek(position.minus(30000)) }) {
-                Column() {
+                Column {
                     Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center,)
                 }
@@ -160,7 +151,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
                 }
             }
             IconButton( onClick = { seek(position.plus(30000)) }) {
-                Column() {
+                Column {
                     Icon(Icons.Default.ChevronRight, "Skip Ten Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
                     Text(text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
@@ -168,7 +159,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
             }
 
             IconButton(onClick = { seek(position.plus(60000)) }) {
-                Column() {
+                Column {
                     Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
                     Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
@@ -191,13 +182,9 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 @Composable
 fun LiveControls(player: Player) {
     val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
-
-
-
     val controlW = screenWidth/7
+
     var isPlaying by remember { mutableStateOf(false) }
 
     DisposableEffect(player) {
@@ -222,6 +209,5 @@ fun LiveControls(player: Player) {
                     Icon(Icons.Default.PlayArrow, "Play", modifier = Modifier.size(controlW.dp,controlW.dp),)
             }
         }
-
     }
 }

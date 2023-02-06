@@ -18,12 +18,9 @@ import com.wpi.audiojournal.ui.component.PageSkeleton
 fun MediaPlayerView(title: String, uriString: String, playTime: Long) {
 
     val configuration = LocalConfiguration.current
-
-    val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
-    //val picH = screenHeight/2
     val picDim = screenWidth*.75
+
     PageSkeleton(header = title) {
         Box(modifier = Modifier.size(picDim.dp,picDim.dp)){
             Image(
@@ -34,7 +31,6 @@ fun MediaPlayerView(title: String, uriString: String, playTime: Long) {
                     .padding(50.dp)
                     .fillMaxSize()
             )
-
         }
 
         Player (Uri.parse(uriString.replace("http:", "https:"))) {

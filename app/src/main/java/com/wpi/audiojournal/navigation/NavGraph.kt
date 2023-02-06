@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wpi.audiojournal.StoreData
 import com.wpi.audiojournal.models.MenuItem
-import com.wpi.audiojournal.screen.SplashScreen
+import com.wpi.audiojournal.view.SplashScreenView
 import com.wpi.audiojournal.ui.theme.ColorScheme
 import com.wpi.audiojournal.view.*
 import com.wpi.audiojournal.viewmodels.FavoritesViewModel
@@ -17,10 +17,10 @@ import com.wpi.audiojournal.viewmodels.FavoritesViewModel
 fun SetupNavGraph(navController: NavHostController, initialRoute: suspend () -> String, setColorScheme: (ColorScheme) -> Unit) {
     NavHost(navController = navController, startDestination = "loading") {
 
-
         composable("loading") {
-            SplashScreen(navController = navController, initialRoute)
+            SplashScreenView(navController = navController, initialRoute)
         }
+
         composable("home") {
             HomeView(
                 menuItems = listOf(
@@ -57,7 +57,6 @@ fun SetupNavGraph(navController: NavHostController, initialRoute: suspend () -> 
         composable("archived-programs") {
             ArchiveView(navController = navController)
         }
-
 
         composable("program-option/{menuTitle}/{name}") { navBackStackEntry ->
             val title = navBackStackEntry.arguments?.getDecodedString("menuTitle") ?: ""
@@ -131,11 +130,11 @@ fun SetupNavGraph(navController: NavHostController, initialRoute: suspend () -> 
             HelpInfoView(uriString = screenID)
             
         }
+
         composable("search_button?q={q}"){
             SearchProgramsView(navController = navController, title = "Search Programs",
                 it.arguments?.getString("q")
             )
-            //ProgramLoad1(navController = navController, title = "Search Programs")
         }
     }
 }

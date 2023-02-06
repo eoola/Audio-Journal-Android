@@ -91,10 +91,6 @@ fun AudioJournalTheme(darkTheme: Boolean = isSystemInDarkTheme(),
         LightColorPalette(colorScheme)
     }
 
-
-//    LocalColorScheme = compositionLocalOf { colorSchemes[viewModel.getColorScheme()!!]}
-
-
     CompositionLocalProvider (LocalColorScheme provides colorScheme) {
         MaterialTheme(
             colors = colors,

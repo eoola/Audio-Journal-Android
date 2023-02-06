@@ -20,22 +20,15 @@ import com.wpi.audiojournal.ui.component.PageSkeleton
 @Composable
 fun HelpInfoView(uriString: String) {
     val info = helpInfoMap[uriString]
+
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
-
-
     val menH = screenHeight-130
-    val menW = screenWidth
-    //val menH = screenHeight/8-10
     val butH = menH/7
-    val butW = menW-10
-
-
     var buttonTextSize = butH/5
-
     var textSize = buttonTextSize
+
     PageSkeleton(header = info?.screenTitle ?: "") {
         info?.let { info ->
 
@@ -48,7 +41,6 @@ fun HelpInfoView(uriString: String) {
                         modifier = Modifier
                             .size(width = 200.dp, height = 100.dp)
                     )
-
 
                     if (info.screenTitle.contains("Audio Journal") && screenWidth < 500){
                         textSize = buttonTextSize-3
@@ -72,9 +64,6 @@ fun HelpInfoView(uriString: String) {
                 }
 
             }
-
-
-
         }
     }
 }

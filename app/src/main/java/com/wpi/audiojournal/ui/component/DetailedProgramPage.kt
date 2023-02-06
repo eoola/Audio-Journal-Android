@@ -29,48 +29,23 @@ import com.wpi.audiojournal.viewmodels.VoiceInputViewModel
 @Composable
 fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: VoiceInputViewModel = viewModel(), textSize:Int, title:String, favViewModel: FavoritesViewModel, strAirtime:String,program: Program) where T : Navigable, T : Titled {
 
-    //Row(horizontalArrangement = Arrangement.Start){
-    //VoiceInput(viewModel)
-    //}
-
     val configuration = LocalConfiguration.current
-
     val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
     val menH = screenHeight-130
     val menW = screenWidth
-    //val menH = screenHeight/8-10
     val butH = menH/7
     val butW = menW-10
-
-
     var buttonTextSize = butH/5
-
-
-
 
     LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
         item{
             Text(text = "Airtime:"+strAirtime,fontSize = buttonTextSize.sp)
-
-
-            //}
-            //Row{
             Text(text = program.description, fontSize = buttonTextSize.sp)
-
-            //}
-
-            //Row{
             FavoritesSection(navController, title, favViewModel)
-
         }
 
         rainbow(menuItems) { menuItem, color ->
-
-
-
-
 
             Button(
                 modifier = Modifier
@@ -88,7 +63,6 @@ fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: Voi
                 }
             ) {
 
-
                 Text(
                     text = menuItem.title,
                     color = LocalColorScheme.current.content,
@@ -96,18 +70,7 @@ fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: Voi
                     textAlign = TextAlign.Center,
                     fontSize = buttonTextSize.sp
                 )
-
-                //if(viewModel.state!!.text.equals(menuItem.title , ignoreCase = true)){
-                //    navController.navigate(menuItem.uri)
-                //}else if(viewModel.state!!.text.equals("Back", ignoreCase = true) || viewModel.state!!.text.equals("Go back", ignoreCase = true) || viewModel.state!!.text.equals("Return", ignoreCase = true)){
-                //    navController.popBackStack()
-                //}
             }
-
         }
-
     }
-
-
-
 }
