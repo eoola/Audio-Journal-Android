@@ -38,7 +38,6 @@ fun HomeView(
                 Image(
                     painter = painterResource(R.drawable.color_palette_icon),
                     contentDescription = "Color Palette Icon",
-                   //modifier = Modifier.size(100.dp, 100.dp),
                     contentScale = ContentScale.Fit
                 )
             }

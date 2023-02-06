@@ -28,18 +28,21 @@ fun GetAirtimeMap(viewModel: ScheduleViewModel = viewModel()){
                         val timeList = mutableListOf<String>()
                         timeList.add(time)
                         airtime.put(day, timeList)
+
                         if (prog != null) {
                             airtimeMap.put(prog, airtime)
                         }
-                    }else{ //if program in map
+                    }
+                        else{ //if program in map
                         val progAirtime =  airtimeMap.get(prog)
+
                         if(progAirtime?.get(day).isNullOrEmpty()){ //if program not the same day
                             //Add day to map
                             val timeList = mutableListOf<String>()
                             timeList.add(time)
                             progAirtime?.put(", "+day, timeList)
-
-                        }else{ //if program ha sthe same day, different time
+                        }
+                        else{ //if program ha sthe same day, different time
                             //add time to list
                             if (progAirtime != null) {
                                 progAirtime.get(day)?.add(", "+ time)

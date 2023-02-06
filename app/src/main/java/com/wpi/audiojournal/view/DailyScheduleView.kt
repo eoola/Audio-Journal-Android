@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.wpi.audiojournal.ui.component.Loading
 import com.wpi.audiojournal.ui.component.PageSkeleton
-import com.wpi.audiojournal.ui.theme.LocalColorScheme
 import com.wpi.audiojournal.viewmodels.ScheduleViewModel
 
 @Composable
@@ -27,18 +26,13 @@ fun DailyScheduleView(title: String, viewModel: ScheduleViewModel = viewModel())
     LaunchedEffect(LocalContext.current) {
         viewModel.loadSchedule()
     }
-    val configuration = LocalConfiguration.current
 
+    val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
     val menH = screenHeight-130
     val menW = screenWidth
-    //val menH = screenHeight/8-10
     val butH = menH/7
-    val butW = menW-10
-
-
     var buttonTextSize = butH/5
 
     PageSkeleton(header = title) {

@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-//import com.wpi.audiojournal.R
 import com.wpi.audiojournal.R
 import com.wpi.audiojournal.ui.component.LiveControls
 import com.wpi.audiojournal.ui.component.Loading
@@ -26,13 +25,8 @@ fun ListenLiveView(title: String, viewModel: LivestreamViewModel = viewModel()) 
     }
 
     val configuration = LocalConfiguration.current
-
-    val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
-
-    //val picH = screenHeight/2
     val picDim = screenWidth*.75
-    //val menH = screenHeight/8-10
 
     PageSkeleton(header = title) {
         Loading(data = viewModel.uri) { uri ->
@@ -45,7 +39,6 @@ fun ListenLiveView(title: String, viewModel: LivestreamViewModel = viewModel()) 
                         .padding(50.dp)
                         .fillMaxSize()
                 )
-
             }
 
             Player(uri) {
