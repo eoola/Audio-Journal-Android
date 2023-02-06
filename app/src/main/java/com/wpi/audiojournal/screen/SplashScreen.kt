@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.invisibleToUser
@@ -38,6 +39,22 @@ import kotlinx.coroutines.launch
 @Composable
 fun SplashScreen(navController: NavController, initialRoute: suspend () -> String){
 
+
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+    val screenHeight = configuration.screenHeightDp
+
+    val menH = screenHeight-130
+    val menW = screenWidth
+    //val menH = screenHeight/8-10
+    val butH = menH/7
+    val butW = menW-10
+
+    var buttonTextSize = butH/5
+
+    val picDim = screenWidth*.75
+
+
     LaunchedEffect(key1 = true){
         val delayJob = launch { delay(1000) }
         val route = initialRoute()
@@ -54,7 +71,7 @@ fun SplashScreen(navController: NavController, initialRoute: suspend () -> Strin
         .background(color = Blue)){
         Column (verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.Black, modifier = Modifier
+            Text(text = "Audio Journal", textAlign = TextAlign.Center, fontSize = (buttonTextSize * 1.5).sp, fontWeight = FontWeight.Bold, color = Color.Black, modifier = Modifier
                 .semantics { this.invisibleToUser() }
                 .padding(40.dp))
             /*Image(
@@ -63,7 +80,7 @@ fun SplashScreen(navController: NavController, initialRoute: suspend () -> Strin
                 Modifier.weight(1f),
                 contentScale = ContentScale.FillHeight
             )*/
-            Image(painter = painterResource(id = R.drawable.ic_mic_ajo), contentDescription = "")
+            Image(painter = painterResource(id = R.drawable.ic_mic_ajo), contentDescription = "", modifier = Modifier.size(picDim.dp, picDim.dp))
             /*val imageLoader = ImageLoader.Builder(LocalContext.current)
                 .componentRegistry {
                     add(SvgDecoder(LocalContext.current))
@@ -81,15 +98,22 @@ fun SplashScreen(navController: NavController, initialRoute: suspend () -> Strin
                     contentScale = ContentScale.FillBounds
                 )
             }*/
-            CircularProgressIndicator(color = Salmon, modifier = Modifier.semantics { this.invisibleToUser() })
-            Text(text = "Made in Cooperation with", textAlign = TextAlign.Center, fontSize = 30.sp, color = Color.Black, modifier = Modifier
-                .semantics { this.invisibleToUser() }
-                .padding(20.dp))
-            Modifier.padding(40.dp)
-            Image(
-                painter = painterResource(id = R.drawable.loading_screen_wpi_logo),
-                contentDescription = null
-            )
+            CircularProgressIndicator(color = Salmon, modifier = Modifier.semantics { this.invisibleToUser() } .padding(40.dp))
+
+            Box(modifier = Modifier.fillMaxSize()){
+                Text(text = "Made in Cooperation with", textAlign = TextAlign.Center, fontSize = (buttonTextSize*1.5).sp, color = Color.Black, modifier = Modifier
+                    .semantics { this.invisibleToUser() }
+                    .padding(20.dp)
+                    .align(Alignment.TopCenter))
+
+                Modifier.padding(40.dp)
+                Image(
+                    painter = painterResource(id = R.drawable.loading_screen_wpi_logo),
+                    contentDescription = null,
+                    modifier = Modifier.align(Alignment.BottomCenter),
+                    contentScale = ContentScale.Fit)
+
+            }
         }
     }
     

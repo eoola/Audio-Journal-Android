@@ -50,7 +50,7 @@ fun <T> DPPage (menuItems: List<T>, navController: NavController, viewModel: Voi
 
 
 
-    LazyColumn {
+    LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
         item{
             Text(text = "Airtime:"+strAirtime,fontSize = buttonTextSize.sp)
 

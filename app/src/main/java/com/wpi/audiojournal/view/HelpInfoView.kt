@@ -39,7 +39,7 @@ fun HelpInfoView(uriString: String) {
     PageSkeleton(header = info?.screenTitle ?: "") {
         info?.let { info ->
 
-            LazyColumn{
+            LazyColumn(horizontalAlignment = Alignment.CenterHorizontally){
                 item{
                     Image(
                         painter = painterResource(id = info.icon),
@@ -47,7 +47,6 @@ fun HelpInfoView(uriString: String) {
                         contentScale = ContentScale.Fit,
                         modifier = Modifier
                             .size(width = 200.dp, height = 100.dp)
-                            .align(Alignment.CenterHorizontally)
                     )
 
 
@@ -68,7 +67,6 @@ fun HelpInfoView(uriString: String) {
                             contentScale = ContentScale.FillWidth,
                             modifier = Modifier
                                 .size(width = 200.dp, height = 100.dp)
-                                .align(Alignment.CenterHorizontally)
                         )
                     }
                 }

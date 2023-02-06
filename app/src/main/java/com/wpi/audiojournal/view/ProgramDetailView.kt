@@ -182,8 +182,8 @@ fun FavoritesSection(navController: NavController, title: String, favViewModel: 
         })
         {
             Box(modifier = Modifier
-                .height(50.dp)
-                .width(50.dp)){
+                .height((buttonTextSize*3).dp)
+                .width((buttonTextSize*3).dp)){
                 Image(
                     painter = painterResource(
                         id = if (marked) {
