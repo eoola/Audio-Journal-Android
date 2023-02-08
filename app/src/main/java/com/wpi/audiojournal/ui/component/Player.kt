@@ -139,20 +139,20 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
             IconButton(onClick = { seek(position.minus(30000)) }) {
                 Column {
                     Icon(Icons.Default.ChevronLeft, "Rewind Thirty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
-                    Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center,)
+                    Text( text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
 
             }
             IconButton(onClick = { if (isPlaying) player.pause() else player.play()}) {
                 if (isPlaying)
-                    Icon(Icons.Default.Pause, "Pause", modifier = Modifier.size(controlW.dp,controlW.dp),)
+                    Icon(Icons.Default.Pause, "Pause", modifier = Modifier.size(controlW.dp,controlW.dp))
                 else{
-                    Icon(Icons.Default.PlayArrow, "Play", modifier = Modifier.size(controlW.dp,controlW.dp),)
+                    Icon(Icons.Default.PlayArrow, "Play", modifier = Modifier.size(controlW.dp,controlW.dp))
                 }
             }
             IconButton( onClick = { seek(position.plus(30000)) }) {
                 Column {
-                    Icon(Icons.Default.ChevronRight, "Skip Ten Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
+                    Icon(Icons.Default.ChevronRight, "Skip Thirty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text(text = "30 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
 
@@ -160,7 +160,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
 
             IconButton(onClick = { seek(position.plus(60000)) }) {
                 Column {
-                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp),)
+                    Icon(Icons.Default.ChevronRight, "Skip Sixty Seconds", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text( text = "60 sec", fontSize = skipTextSize, textAlign = TextAlign.Center)
                 }
             }
@@ -168,7 +168,7 @@ fun Controls(player: Player, title:String, playTime: Long, uri: String) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             IconButton(onClick = { player.setPlaybackSpeed(playbackSpeed.plus(0.5F).takeIf { it <= 2F} ?: 0.5F) }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed", modifier = Modifier.size(controlW.dp,controlW.dp),)
+                    Icon(Icons.Default.KeyboardDoubleArrowRight, "Playback Speed", modifier = Modifier.size(controlW.dp,controlW.dp))
                     Text(
                         text = "${DecimalFormat("#.##").format(playbackSpeed)}x",
                         fontSize = skipTextSize, textAlign = TextAlign.Center
