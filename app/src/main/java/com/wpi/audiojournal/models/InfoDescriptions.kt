@@ -11,7 +11,8 @@ val AudioJournalInfo = InfoDescription(
     "Audio Journal\'s mission in Central Massachusetts is to connect individuals with a visual impairment, or an inability to access print material, to their communities through broadcasting of local news, information, and entertainment with exclusive programs and content.\n\n" +
             "This app is one of many different methods of accessing Audio Journal broadcasts. Contact Audio Journal for assistance in choosing the best listening method for you.\n\n" +
             "Audio Journal\n799 West Boylston Street\n" +
-            "Worcester, MA 01606\n508-797-1117\ninfo@audiojournal.org\nhttps://audiojournal.org\n\nFor app support (including to report a bug with the app), please email:\ninfo@audiojournal.org",
+            "Worcester, MA 01606\n508-797-1117\ninfo@audiojournal.org\nhttps://audiojournal.org\n\nFor app support (including to report a bug with the app), please email:\ninfo@audiojournal.org\n\n" +
+            "View our Privacy Policy at: https://audiojournal.org/privacy-policy-2",
     R.drawable.main_logo
 )
 
